@@ -2,73 +2,57 @@
 
 /* =========================================================
    ENGLISH 4MS
-   CHAPTER 1 ONLY
-   Selected English Texts - 4MS / BEM
+   CHAPTER 1 + CHAPTER 2 + CHAPTER 3
 ========================================================= */
 
-let speechRate = Number(
-  localStorage.getItem("englishPlusSpeechRate")
-) || 1;
-const speedBtn =
-  document.getElementById("speedBtn");
+let speechRate =
+  Number(localStorage.getItem("englishPlusSpeechRate")) || 1;
 
-const speedMenu =
-  document.getElementById("speedMenu");
+const speedBtn = document.getElementById("speedBtn");
+const speedMenu = document.getElementById("speedMenu");
 
+if (speedBtn) {
+  speedBtn.textContent = speechRate + "× ▼";
 
+  speedBtn.addEventListener("click", () => {
+    speedMenu?.classList.toggle("hidden");
+  });
+}
 
-speedBtn.textContent =
-  speechRate + "× ▼";
+document.querySelectorAll(".speed-item").forEach(item => {
 
-speedBtn.addEventListener("click", () => {
+  if (Number(item.dataset.rate) === speechRate) {
+    item.classList.add("active");
+  }
 
-  speedMenu.classList.toggle("hidden");
+  item.addEventListener("click", () => {
+
+    speechRate = Number(item.dataset.rate);
+
+    localStorage.setItem(
+      "englishPlusSpeechRate",
+      speechRate
+    );
+
+    if (speedBtn) {
+      speedBtn.textContent = speechRate + "× ▼";
+    }
+
+    document
+      .querySelectorAll(".speed-item")
+      .forEach(i => i.classList.remove("active"));
+
+    item.classList.add("active");
+
+    speedMenu?.classList.add("hidden");
+  });
 
 });
 
-document.querySelectorAll(".speed-item")
-  .forEach(item => {
-
-    if (Number(item.dataset.rate) === speechRate) {
-
-      item.classList.add("active");
-
-    }
-
-    item.addEventListener("click", () => {
-
-      speechRate = Number(item.dataset.rate);
-
-      localStorage.setItem(
-        "englishPlusSpeechRate",
-        speechRate
-      );
-
-      speedBtn.textContent =
-        speechRate + "× ▼";
-
-      document
-        .querySelectorAll(".speed-item")
-        .forEach(i =>
-          i.classList.remove("active")
-        );
-
-      item.classList.add("active");
-
-      speedMenu.classList.add("hidden");
-
-    });
-
-  });
-
 document.addEventListener("click", e => {
-
   if (!e.target.closest(".speed-selector")) {
-
-    speedMenu.classList.add("hidden");
-
+    speedMenu?.classList.add("hidden");
   }
-
 });
 
 
@@ -77,135 +61,135 @@ document.addEventListener("click", e => {
 ========================================================= */
 
 const DOM = {
+
   playAudioBtn:
     document.getElementById("playAudioBtn"),
-  
-    stopAudioBtn:
+
+  stopAudioBtn:
     document.getElementById("stopAudioBtn"),
-  
-    
-    app:
-        document.getElementById("app"),
 
-    menuBtn:
-        document.getElementById("menuBtn"),
+  app:
+    document.getElementById("app"),
 
-    closeMenuBtn:
-        document.getElementById("closeMenuBtn"),
+  menuBtn:
+    document.getElementById("menuBtn"),
 
-    sideMenu:
-        document.getElementById("sideMenu"),
+  closeMenuBtn:
+    document.getElementById("closeMenuBtn"),
 
-    menuOverlay:
-        document.getElementById("menuOverlay"),
+  sideMenu:
+    document.getElementById("sideMenu"),
 
-    searchBtn:
-        document.getElementById("searchBtn"),
+  menuOverlay:
+    document.getElementById("menuOverlay"),
 
-    searchPanel:
-        document.getElementById("searchPanel"),
+  searchBtn:
+    document.getElementById("searchBtn"),
 
-    searchInput:
-        document.getElementById("searchInput"),
+  searchPanel:
+    document.getElementById("searchPanel"),
 
-    clearSearchBtn:
-        document.getElementById("clearSearchBtn"),
+  searchInput:
+    document.getElementById("searchInput"),
 
-    favoritesBtn:
-        document.getElementById("favoritesBtn"),
+  clearSearchBtn:
+    document.getElementById("clearSearchBtn"),
 
-    levelsBtn:
-        document.getElementById("levels"),
+  favoritesBtn:
+    document.getElementById("favoritesBtn"),
 
-    levelSection:
-        document.querySelector(".level-section"),
+  levelsBtn:
+    document.getElementById("levels"),
 
-    lessonsList:
-        document.getElementById("lessonsList"),
+  levelSection:
+    document.querySelector(".level-section"),
 
-    emptyState:
-        document.getElementById("emptyState"),
+  lessonsList:
+    document.getElementById("lessonsList"),
 
-    lessonsTitle:
-        document.getElementById("lessonsTitle"),
+  emptyState:
+    document.getElementById("emptyState"),
 
-    lessonsSubtitle:
-        document.getElementById("lessonsSubtitle"),
+  lessonsTitle:
+    document.getElementById("lessonsTitle"),
 
-    lessonCount:
-        document.getElementById("lessonCount"),
+  lessonsSubtitle:
+    document.getElementById("lessonsSubtitle"),
 
-    readerModal:
-        document.getElementById("readerModal"),
+  lessonCount:
+    document.getElementById("lessonCount"),
 
-    modalOverlay:
-        document.querySelector(".modal-overlay"),
+  readerModal:
+    document.getElementById("readerModal"),
 
-    closeReaderBtn:
-        document.getElementById("closeReaderBtn"),
+  modalOverlay:
+    document.querySelector(".modal-overlay"),
 
-    readerLevel:
-        document.getElementById("readerLevel"),
+  closeReaderBtn:
+    document.getElementById("closeReaderBtn"),
 
-    readerLessonNumber:
-        document.getElementById("readerLessonNumber"),
+  readerLevel:
+    document.getElementById("readerLevel"),
 
-    readerFavoriteBtn:
-        document.getElementById("readerFavoriteBtn"),
+  readerLessonNumber:
+    document.getElementById("readerLessonNumber"),
 
-    readerTitle:
-        document.getElementById("readerTitle"),
+  readerFavoriteBtn:
+    document.getElementById("readerFavoriteBtn"),
 
-    readerTitleAr:
-        document.getElementById("readerTitleAr"),
+  readerTitle:
+    document.getElementById("readerTitle"),
 
-    readerText:
-        document.getElementById("readerText"),
+  readerTitleAr:
+    document.getElementById("readerTitleAr"),
 
-    readerTranslation:
-        document.getElementById("readerTranslation"),
+  readerText:
+    document.getElementById("readerText"),
 
-    vocabularySection:
-        document.getElementById("vocabularySection"),
+  readerTranslation:
+    document.getElementById("readerTranslation"),
 
-    vocabularyContainer:
-        document.getElementById("vocabularyContainer"),
+  vocabularySection:
+    document.getElementById("vocabularySection"),
 
-    questionsSection:
-        document.getElementById("questionsSection"),
+  vocabularyContainer:
+    document.getElementById("vocabularyContainer"),
 
-    questionsContainer:
-        document.getElementById("questionsContainer"),
+  questionsSection:
+    document.getElementById("questionsSection"),
 
-    showAnswersBtn:
-        document.getElementById("showAnswersBtn"),
+  questionsContainer:
+    document.getElementById("questionsContainer"),
 
-    answersContainer:
-        document.getElementById("answersContainer"),
+  showAnswersBtn:
+    document.getElementById("showAnswersBtn"),
 
-    prevLessonBtn:
-        document.getElementById("prevLessonBtn"),
+  answersContainer:
+    document.getElementById("answersContainer"),
 
-    nextLessonBtn:
-        document.getElementById("nextLessonBtn"),
+  prevLessonBtn:
+    document.getElementById("prevLessonBtn"),
 
-    currentPosition:
-        document.getElementById("currentPosition"),
+  nextLessonBtn:
+    document.getElementById("nextLessonBtn"),
 
-    continueMenuBtn:
-        document.getElementById("continueMenuBtn"),
+  currentPosition:
+    document.getElementById("currentPosition"),
 
-    resetProgressBtn:
-        document.getElementById("resetProgressBtn"),
+  continueMenuBtn:
+    document.getElementById("continueMenuBtn"),
 
-    toast:
-        document.getElementById("toast"),
+  resetProgressBtn:
+    document.getElementById("resetProgressBtn"),
 
-    toastMessage:
-        document.getElementById("toastMessage"),
+  toast:
+    document.getElementById("toast"),
 
-    openWebBtn:
-        document.getElementById("openWebBtn")
+  toastMessage:
+    document.getElementById("toastMessage"),
+
+  openWebBtn:
+    document.getElementById("openWebBtn")
 
 };
 
@@ -216,46 +200,54 @@ const DOM = {
 
 const CONFIG = {
 
-    DATA_FILES: {
+  DATA_FILES: {
 
-        chapter1:
-            "chapter1.json"
+    chapter1:
+      "chapter1.json",
 
-    },
+    chapter2:
+      "chapter2.json",
 
+    chapter3:
+      "chapter3.json"
 
-    STORAGE_KEYS: {
+  },
 
-        CHAPTER:
-            "english_plus_chapter",
+  STORAGE_KEYS: {
 
-        FAVORITES:
-            "english_plus_favorites",
+    CHAPTER:
+      "english_plus_chapter",
 
-        COMPLETED:
-            "english_plus_completed",
+    FAVORITES:
+      "english_plus_favorites",
 
-        LAST_LESSON:
-            "english_plus_last_lesson",
+    COMPLETED:
+      "english_plus_completed",
 
-        SPEECH_RATE:
-            "englishPlusSpeechRate",
+    LAST_LESSON:
+      "english_plus_last_lesson",
 
-        THEME:
-            "englishPlusTheme"
+    LAST_CHAPTER:
+      "english_plus_last_chapter",
 
-    },
+    SPEECH_RATE:
+      "englishPlusSpeechRate",
 
+    THEME:
+      "englishPlusTheme"
 
-    DEFAULT_CHAPTER:
-        "chapter1",
+  },
 
+  DEFAULT_CHAPTER:
+    "chapter1",
 
-    CHAPTERS: [
+  CHAPTERS: [
 
-        "chapter1"
+    "chapter1",
+    "chapter2",
+    "chapter3"
 
-    ]
+  ]
 
 };
 
@@ -266,275 +258,59 @@ const CONFIG = {
 
 const AppState = {
 
-    data: {
+  data: {
 
-        chapter1:
-            null
+    chapter1: null,
+    chapter2: null,
+    chapter3: null
 
-    },
+  },
 
+  currentChapter:
+    CONFIG.DEFAULT_CHAPTER,
 
-    currentChapter:
-        CONFIG.DEFAULT_CHAPTER,
+  currentLessonIndex:
+    0,
 
+  currentLesson:
+    null,
 
-    currentLessonIndex:
-        0,
+  searchQuery:
+    "",
 
+  showFavoritesOnly:
+    false,
 
-    currentLesson:
-        null,
+  completedOnly:
+    false,
 
+  favorites:
+    [],
 
-    searchQuery:
-        "",
+  completed:
+    [],
 
-
-    showFavoritesOnly:
-        false,
-
-
-    completedOnly:
-        false,
-
-
-    favorites:
-        [],
-
-
-    completed:
-        [],
-
-
-    isSpeaking:
-        false
+  isSpeaking:
+    false
 
 };
 
 
 /* =========================================================
-   SPEECH RATE INITIALIZATION
-========================================================= */
-
-const savedSpeechRate =
-
-    localStorage.getItem(
-        CONFIG.STORAGE_KEYS.SPEECH_RATE
-    ) || "1";
-
-
-if (speechRate) {
-
-    speechRate = Number(savedSpeechRate);
-
-}
-
-
-
-
-
-/* =========================================================
-   CLOSE SPEECH RATE CONTROL
-========================================================= */
-
-document.addEventListener(
-    "click",
-    (event) => {
-
-        
-
-
-        
-
-        const clickedSpeakButton =
-            event.target.closest(
-                "#openWebBtn"
-            );
-
-
-        
-    }
-);
-
-
-/* =========================================================
-   ANDROID BACK BUTTON
-========================================================= */
-
-async function setupAndroidBackButton() {
-
-    try {
-
-        const { App } =
-            await import("@capacitor/app");
-
-
-        App.addListener(
-            "backButton",
-            () => {
-
-                /* Reader */
-
-                if (
-                    DOM.readerModal &&
-                    !DOM.readerModal.classList.contains("hidden")
-                ) {
-
-                    closeReader();
-
-                    return;
-
-                }
-
-
-                /* Reset modal */
-
-                if (
-                    resetModal &&
-                    !resetModal.classList.contains("hidden")
-                ) {
-
-                    closeResetModal();
-
-                    return;
-
-                }
-
-
-                /* Side menu */
-
-                if (
-                    DOM.sideMenu &&
-                    DOM.sideMenu.classList.contains("open")
-                ) {
-
-                    closeMenu();
-
-                    return;
-
-                }
-
-
-                /* Search */
-
-                if (
-                    DOM.searchPanel &&
-                    !DOM.searchPanel.classList.contains("hidden")
-                ) {
-
-                    DOM.searchPanel.classList.add(
-                        "hidden"
-                    );
-
-
-                    DOM.searchBtn?.setAttribute(
-                        "aria-expanded",
-                        "false"
-                    );
-
-
-                    return;
-
-                }
-
-
-                /* Chapter section */
-
-                if (
-                    DOM.levelSection &&
-                    !DOM.levelSection.classList.contains("hidden")
-                ) {
-
-                    hideChapters();
-
-                    return;
-
-                }
-
-
-                /* Exit */
-
-                showExitConfirmation();
-
-            }
-        );
-
-
-    } catch (error) {
-
-        console.warn(
-            "Capacitor App plugin is not available:",
-            error
-        );
-
-    }
-
-}
-
-
-/* =========================================================
-   EXIT CONFIRMATION
-========================================================= */
-
-async function showExitConfirmation() {
-
-    try {
-
-        const { App } =
-            await import("@capacitor/app");
-
-
-        const confirmed =
-            window.confirm(
-                "Do you want to exit English 4MS?"
-            );
-
-
-        if (confirmed) {
-
-            await App.exitApp();
-
-        }
-
-
-    } catch (error) {
-
-        console.warn(
-            "Unable to exit application:",
-            error
-        );
-
-    }
-
-}
-
-
-/* =========================================================
-   RESET MODAL DOM
+   RESET MODAL
 ========================================================= */
 
 const resetModal =
-    document.getElementById(
-        "resetModal"
-    );
-
+  document.getElementById("resetModal");
 
 const cancelResetBtn =
-    document.getElementById(
-        "cancelResetBtn"
-    );
-
+  document.getElementById("cancelResetBtn");
 
 const confirmResetBtn =
-    document.getElementById(
-        "confirmResetBtn"
-    );
-
+  document.getElementById("confirmResetBtn");
 
 const resetModalOverlay =
-    document.getElementById(
-        "resetModalOverlay"
-    );
+  document.getElementById("resetModalOverlay");
 
 
 /* =========================================================
@@ -542,9 +318,7 @@ const resetModalOverlay =
 ========================================================= */
 
 const themeToggleBtn =
-    document.getElementById(
-        "themeToggleBtn"
-    );
+  document.getElementById("themeToggleBtn");
 
 
 /* =========================================================
@@ -552,59 +326,79 @@ const themeToggleBtn =
 ========================================================= */
 
 document.addEventListener(
-    "DOMContentLoaded",
-    init
+  "DOMContentLoaded",
+  init
 );
 
 
 async function init() {
 
-    loadStorage();
+  loadStorage();
 
-    loadTheme();
+  loadTheme();
 
-    bindEvents();
+  bindEvents();
 
-    await setupAndroidBackButton();
+  await setupAndroidBackButton();
 
-    await loadChapter();
+  await loadChapter();
 
-    updateThemeButton();
+  updateThemeButton();
 
-    updateUI();
+  updateUI();
+
+  openLessonFromURL();
 
 }
 
 
 /* =========================================================
-   LOAD CHAPTER
+   LOAD ALL CHAPTERS
 ========================================================= */
 
 async function loadChapter() {
 
+  let loaded = 0;
+
+  for (const chapter of CONFIG.CHAPTERS) {
+
     try {
 
-        await loadChapterData(
-            "chapter1"
-        );
+      await loadChapterData(chapter);
 
+      loaded++;
 
-        console.log(
-            "English 4MS Chapter 1 loaded successfully."
-        );
-
+      console.log(
+        `${chapter} loaded successfully.`
+      );
 
     } catch (error) {
 
-        console.error(
-            "Chapter loading error:",
-            error
-        );
+      console.warn(
+        `Unable to load ${chapter}:`,
+        error
+      );
 
+      AppState.data[chapter] = {
 
-        showDataError();
+        chapter,
+
+        title:
+          getChapterTitle(chapter),
+
+        lessons: []
+
+      };
 
     }
+
+  }
+
+  if (loaded === 0) {
+
+    showDataError();
+
+  }
 
 }
 
@@ -613,55 +407,43 @@ async function loadChapter() {
    LOAD ONE CHAPTER
 ========================================================= */
 
-async function loadChapterData(
-    chapter
-) {
+async function loadChapterData(chapter) {
 
-    const file =
-        CONFIG.DATA_FILES[
-            chapter
-        ];
+  const file =
+    CONFIG.DATA_FILES[chapter];
 
+  if (!file) {
 
-    if (!file) {
+    throw new Error(
+      `No data file configured for ${chapter}`
+    );
 
-        throw new Error(
-            `No data file configured for ${chapter}`
-        );
+  }
 
-    }
+  const response =
+    await fetch(
+      file,
+      {
+        cache: "no-store"
+      }
+    );
 
+  if (!response.ok) {
 
-    const response =
-        await fetch(
-            file,
-            {
-                cache:
-                    "no-store"
-            }
-        );
+    throw new Error(
+      `Failed to load ${file}: ${response.status}`
+    );
 
+  }
 
-    if (!response.ok) {
+  const data =
+    await response.json();
 
-        throw new Error(
-            `Failed to load ${file}: ${response.status}`
-        );
-
-    }
-
-
-    const data =
-        await response.json();
-
-
-    AppState.data[
-        chapter
-    ] =
-        normalizeChapterData(
-            data,
-            chapter
-        );
+  AppState.data[chapter] =
+    normalizeChapterData(
+      data,
+      chapter
+    );
 
 }
 
@@ -671,80 +453,59 @@ async function loadChapterData(
 ========================================================= */
 
 function normalizeChapterData(
-    data,
-    chapter
+  data,
+  chapter
 ) {
 
-    /* Direct array */
-
-    if (Array.isArray(data)) {
-
-        return {
-
-            chapter:
-                chapter,
-
-            title:
-                getChapterTitle(
-                    chapter
-                ),
-
-            lessons:
-                data
-
-        };
-
-    }
-
-
-    /* Invalid data */
-
-    if (
-        !data ||
-        typeof data !== "object"
-    ) {
-
-        return {
-
-            chapter:
-                chapter,
-
-            title:
-                getChapterTitle(
-                    chapter
-                ),
-
-            lessons:
-                []
-
-        };
-
-    }
-
+  if (Array.isArray(data)) {
 
     return {
 
-        chapter:
-            data.chapter ||
-            chapter,
+      chapter,
 
-        title:
-            data.title ||
-            getChapterTitle(
-                chapter
-            ),
+      title:
+        getChapterTitle(chapter),
 
-        lessons:
-
-            Array.isArray(
-                data.lessons
-            )
-
-                ? data.lessons
-
-                : []
+      lessons:
+        data
 
     };
+
+  }
+
+  if (
+    !data ||
+    typeof data !== "object"
+  ) {
+
+    return {
+
+      chapter,
+
+      title:
+        getChapterTitle(chapter),
+
+      lessons: []
+
+    };
+
+  }
+
+  return {
+
+    chapter:
+      data.chapter || chapter,
+
+    title:
+      data.title ||
+      getChapterTitle(chapter),
+
+    lessons:
+      Array.isArray(data.lessons)
+        ? data.lessons
+        : []
+
+  };
 
 }
 
@@ -755,76 +516,60 @@ function normalizeChapterData(
 
 function loadStorage() {
 
-    const savedChapter =
-        localStorage.getItem(
-            CONFIG.STORAGE_KEYS.CHAPTER
-        );
+  const savedChapter =
+    localStorage.getItem(
+      CONFIG.STORAGE_KEYS.CHAPTER
+    );
 
+  if (
+    CONFIG.CHAPTERS.includes(
+      savedChapter
+    )
+  ) {
 
-    if (
-        savedChapter ===
-        "chapter1"
-    ) {
+    AppState.currentChapter =
+      savedChapter;
 
-        AppState.currentChapter =
-            "chapter1";
+  }
 
-    }
+  AppState.favorites =
+    loadArrayFromStorage(
+      CONFIG.STORAGE_KEYS.FAVORITES
+    );
 
-
-    AppState.favorites =
-        loadArrayFromStorage(
-            CONFIG.STORAGE_KEYS.FAVORITES
-        );
-
-
-    AppState.completed =
-        loadArrayFromStorage(
-            CONFIG.STORAGE_KEYS.COMPLETED
-        );
+  AppState.completed =
+    loadArrayFromStorage(
+      CONFIG.STORAGE_KEYS.COMPLETED
+    );
 
 }
 
 
-/* =========================================================
-   LOAD ARRAY FROM STORAGE
-========================================================= */
+function loadArrayFromStorage(key) {
 
-function loadArrayFromStorage(
-    key
-) {
+  try {
 
-    try {
+    const value =
+      JSON.parse(
+        localStorage.getItem(key)
+      );
 
-        const value =
-            JSON.parse(
-                localStorage.getItem(
-                    key
-                )
-            );
+    if (Array.isArray(value)) {
 
-
-        if (
-            Array.isArray(value)
-        ) {
-
-            return value.map(
-                String
-            );
-
-        }
-
-    } catch (error) {
-
-        console.warn(
-            `Invalid storage data: ${key}`,
-            error
-        );
+      return value.map(String);
 
     }
 
+  } catch (error) {
 
-    return [];
+    console.warn(
+      `Invalid storage data: ${key}`,
+      error
+    );
+
+  }
+
+  return [];
 
 }
 
@@ -835,26 +580,24 @@ function loadArrayFromStorage(
 
 function saveStorage() {
 
-    localStorage.setItem(
-        CONFIG.STORAGE_KEYS.CHAPTER,
-        "chapter1"
-    );
+  localStorage.setItem(
+    CONFIG.STORAGE_KEYS.CHAPTER,
+    AppState.currentChapter
+  );
 
+  localStorage.setItem(
+    CONFIG.STORAGE_KEYS.FAVORITES,
+    JSON.stringify(
+      AppState.favorites
+    )
+  );
 
-    localStorage.setItem(
-        CONFIG.STORAGE_KEYS.FAVORITES,
-        JSON.stringify(
-            AppState.favorites
-        )
-    );
-
-
-    localStorage.setItem(
-        CONFIG.STORAGE_KEYS.COMPLETED,
-        JSON.stringify(
-            AppState.completed
-        )
-    );
+  localStorage.setItem(
+    CONFIG.STORAGE_KEYS.COMPLETED,
+    JSON.stringify(
+      AppState.completed
+    )
+  );
 
 }
 
@@ -865,182 +608,270 @@ function saveStorage() {
 
 function bindEvents() {
 
-    /* MENU */
+  DOM.menuBtn?.addEventListener(
+    "click",
+    openMenu
+  );
 
-    DOM.menuBtn?.addEventListener(
+  DOM.closeMenuBtn?.addEventListener(
+    "click",
+    closeMenu
+  );
+
+  DOM.menuOverlay?.addEventListener(
+    "click",
+    closeMenu
+  );
+
+
+  DOM.searchBtn?.addEventListener(
+    "click",
+    toggleSearch
+  );
+
+  DOM.searchInput?.addEventListener(
+    "input",
+    handleSearch
+  );
+
+  DOM.clearSearchBtn?.addEventListener(
+    "click",
+    clearSearch
+  );
+
+
+  DOM.favoritesBtn?.addEventListener(
+    "click",
+    toggleFavorites
+  );
+
+
+  DOM.levelsBtn?.addEventListener(
+    "click",
+    toggleChapters
+  );
+
+  DOM.levelSection?.addEventListener(
+    "click",
+    handleChapterClick
+  );
+
+
+  DOM.closeReaderBtn?.addEventListener(
+    "click",
+    closeReader
+  );
+
+  DOM.modalOverlay?.addEventListener(
+    "click",
+    closeReader
+  );
+
+  DOM.readerFavoriteBtn?.addEventListener(
+    "click",
+    toggleCurrentFavorite
+  );
+
+  DOM.prevLessonBtn?.addEventListener(
+    "click",
+    previousLesson
+  );
+
+  DOM.nextLessonBtn?.addEventListener(
+    "click",
+    nextLesson
+  );
+
+
+  document
+    .querySelectorAll(".side-nav-item")
+    .forEach(button => {
+
+      button.addEventListener(
         "click",
-        openMenu
+        handleSideNavigation
+      );
+
+    });
+
+
+  DOM.continueMenuBtn?.addEventListener(
+    "click",
+    continueLastLesson
+  );
+
+
+  DOM.resetProgressBtn?.addEventListener(
+    "click",
+    resetProgress
+  );
+
+  cancelResetBtn?.addEventListener(
+    "click",
+    closeResetModal
+  );
+
+  resetModalOverlay?.addEventListener(
+    "click",
+    closeResetModal
+  );
+
+  confirmResetBtn?.addEventListener(
+    "click",
+    confirmReset
+  );
+
+
+  themeToggleBtn?.addEventListener(
+    "click",
+    toggleTheme
+  );
+
+
+  document.addEventListener(
+    "keydown",
+    handleKeyboard
+  );
+
+
+  DOM.playAudioBtn?.addEventListener(
+    "click",
+    speakCurrentLesson
+  );
+
+  DOM.stopAudioBtn?.addEventListener(
+    "click",
+    stopSpeech
+  );
+
+
+  DOM.openWebBtn?.addEventListener(
+    "click",
+    openCurrentLessonOnWeb
+  );
+
+}
+
+
+/* =========================================================
+   ANDROID BACK BUTTON
+========================================================= */
+
+async function setupAndroidBackButton() {
+
+  try {
+
+    const { App } =
+      await import("@capacitor/app");
+
+    App.addListener(
+      "backButton",
+      () => {
+
+        if (
+          DOM.readerModal &&
+          !DOM.readerModal.classList.contains("hidden")
+        ) {
+
+          closeReader();
+          return;
+
+        }
+
+        if (
+          resetModal &&
+          !resetModal.classList.contains("hidden")
+        ) {
+
+          closeResetModal();
+          return;
+
+        }
+
+        if (
+          DOM.sideMenu &&
+          DOM.sideMenu.classList.contains("open")
+        ) {
+
+          closeMenu();
+          return;
+
+        }
+
+        if (
+          DOM.searchPanel &&
+          !DOM.searchPanel.classList.contains("hidden")
+        ) {
+
+          DOM.searchPanel.classList.add("hidden");
+
+          DOM.searchBtn?.setAttribute(
+            "aria-expanded",
+            "false"
+          );
+
+          return;
+
+        }
+
+        if (
+          DOM.levelSection &&
+          !DOM.levelSection.classList.contains("hidden")
+        ) {
+
+          hideChapters();
+          return;
+
+        }
+
+        showExitConfirmation();
+
+      }
     );
 
+  } catch (error) {
 
-    DOM.closeMenuBtn?.addEventListener(
-        "click",
-        closeMenu
+    console.warn(
+      "Capacitor App plugin is not available:",
+      error
     );
 
+  }
 
-    DOM.menuOverlay?.addEventListener(
-        "click",
-        closeMenu
+}
+
+
+/* =========================================================
+   EXIT
+========================================================= */
+
+async function showExitConfirmation() {
+
+  try {
+
+    const { App } =
+      await import("@capacitor/app");
+
+    const confirmed =
+      window.confirm(
+        "Do you want to exit English 4MS?"
+      );
+
+    if (confirmed) {
+
+      await App.exitApp();
+
+    }
+
+  } catch (error) {
+
+    console.warn(
+      "Unable to exit application:",
+      error
     );
 
+  }
 
-    /* SEARCH */
-
-    DOM.searchBtn?.addEventListener(
-        "click",
-        toggleSearch
-    );
-
-
-    DOM.searchInput?.addEventListener(
-        "input",
-        handleSearch
-    );
-
-
-    DOM.clearSearchBtn?.addEventListener(
-        "click",
-        clearSearch
-    );
-
-
-    /* FAVORITES */
-
-    DOM.favoritesBtn?.addEventListener(
-        "click",
-        toggleFavorites
-    );
-
-
-    /* CHAPTER */
-
-    DOM.levelsBtn?.addEventListener(
-        "click",
-        toggleChapters
-    );
-
-
-    DOM.levelSection?.addEventListener(
-        "click",
-        handleChapterClick
-    );
-
-
-    /* READER */
-
-    DOM.closeReaderBtn?.addEventListener(
-        "click",
-        closeReader
-    );
-
-
-    DOM.modalOverlay?.addEventListener(
-        "click",
-        closeReader
-    );
-
-
-    DOM.readerFavoriteBtn?.addEventListener(
-        "click",
-        toggleCurrentFavorite
-    );
-
-
-    DOM.prevLessonBtn?.addEventListener(
-        "click",
-        previousLesson
-    );
-
-
-    DOM.nextLessonBtn?.addEventListener(
-        "click",
-        nextLesson
-    );
-
-
-    
-
-
-    /* SIDE NAVIGATION */
-
-    document
-        .querySelectorAll(
-            ".side-nav-item"
-        )
-        .forEach(
-            button => {
-
-                button.addEventListener(
-                    "click",
-                    handleSideNavigation
-                );
-
-            }
-        );
-
-
-    /* CONTINUE */
-
-    DOM.continueMenuBtn?.addEventListener(
-        "click",
-        continueLastLesson
-    );
-
-
-    /* RESET */
-
-    DOM.resetProgressBtn?.addEventListener(
-        "click",
-        resetProgress
-    );
-
-
-    cancelResetBtn?.addEventListener(
-        "click",
-        closeResetModal
-    );
-
-
-    resetModalOverlay?.addEventListener(
-        "click",
-        closeResetModal
-    );
-
-
-    confirmResetBtn?.addEventListener(
-        "click",
-        confirmReset
-    );
-
-
-    /* THEME */
-
-    themeToggleBtn?.addEventListener(
-        "click",
-        toggleTheme
-    );
-
-
-    /* KEYBOARD */
-
-    document.addEventListener(
-        "keydown",
-        handleKeyboard
-    );
-    
-    
-    
-    
-    DOM.playAudioBtn?.addEventListener(
-      "click",
-      speakCurrentLesson
-    );
-    
-    DOM.stopAudioBtn?.addEventListener(
-      "click",
-      stopSpeech
-    );
 }
 
 
@@ -1050,11 +881,11 @@ function bindEvents() {
 
 function updateUI() {
 
-    updateActiveChapter();
+  updateActiveChapter();
 
-    updateFavoritesButton();
+  updateFavoritesButton();
 
-    renderLessons();
+  renderLessons();
 
 }
 
@@ -1063,115 +894,109 @@ function updateUI() {
    CHAPTER MANAGEMENT
 ========================================================= */
 
-function handleChapterClick(
-    event
-) {
+function handleChapterClick(event) {
 
-    const button =
-        event.target.closest(
-            ".level-btn"
-        );
+  const button =
+    event.target.closest(
+      ".level-btn"
+    );
 
+  if (!button) {
+    return;
+  }
 
-    if (!button) {
+  const chapter =
+    button.dataset.chapter ||
+    button.dataset.level;
 
-        return;
+  if (
+    !CONFIG.CHAPTERS.includes(chapter)
+  ) {
+    return;
+  }
 
-    }
+  if (
+    !AppState.data[chapter]
+  ) {
 
+    showToast(
+      "هذا الفصل غير متوفر حالياً."
+    );
 
-    const chapter =
-        button.dataset.chapter ||
-        button.dataset.level;
+    return;
 
+  }
 
-    if (
-        chapter !== "chapter1"
-    ) {
+  AppState.currentChapter =
+    chapter;
 
-        return;
+  AppState.currentLessonIndex =
+    0;
 
-    }
+  AppState.currentLesson =
+    null;
 
+  AppState.searchQuery =
+    "";
 
-    AppState.currentChapter =
-        "chapter1";
+  AppState.showFavoritesOnly =
+    false;
 
+  if (DOM.searchInput) {
+    DOM.searchInput.value = "";
+  }
 
-    AppState.searchQuery =
-        "";
+  saveStorage();
 
+  updateActiveChapter();
 
-    AppState.showFavoritesOnly =
-        false;
+  renderLessons();
 
-
-    if (DOM.searchInput) {
-
-        DOM.searchInput.value =
-            "";
-
-    }
-
-
-    saveStorage();
-
-    updateActiveChapter();
-
-    renderLessons();
-
-    hideChapters();
+  hideChapters();
 
 }
 
 
 /* =========================================================
-   UPDATE ACTIVE CHAPTER
+   ACTIVE CHAPTER
 ========================================================= */
 
 function updateActiveChapter() {
 
-    document
-        .querySelectorAll(
-            ".level-btn"
-        )
-        .forEach(
-            button => {
+  document
+    .querySelectorAll(".level-btn")
+    .forEach(button => {
 
-                const buttonChapter =
-                    button.dataset.chapter ||
-                    button.dataset.level;
+      const buttonChapter =
+        button.dataset.chapter ||
+        button.dataset.level;
 
+      const active =
+        buttonChapter ===
+        AppState.currentChapter;
 
-                const active =
-                    buttonChapter ===
-                    "chapter1";
+      button.classList.toggle(
+        "active",
+        active
+      );
 
+      button.setAttribute(
+        "aria-selected",
+        String(active)
+      );
 
-                button.classList.toggle(
-                    "active",
-                    active
-                );
-
-
-                button.setAttribute(
-                    "aria-selected",
-                    String(active)
-                );
-
-            }
-        );
+    });
 
 
-    if (
-        DOM.lessonsTitle &&
-        !AppState.showFavoritesOnly
-    ) {
+  if (
+    DOM.lessonsTitle &&
+    !AppState.showFavoritesOnly
+  ) {
 
-        DOM.lessonsTitle.textContent =
-            "نصوص الفصل الأول";
+    DOM.lessonsTitle.textContent =
+      getCurrentChapterTitle();
 
-    }
+  }
 
 }
 
@@ -1182,51 +1007,48 @@ function updateActiveChapter() {
 
 function toggleChapters() {
 
-    const isHidden =
-        DOM.levelSection?.classList.contains(
-            "hidden"
-        );
+  const hidden =
+    DOM.levelSection?.classList.contains(
+      "hidden"
+    );
 
+  if (hidden) {
 
-    if (isHidden) {
+    showChapters();
 
-        showChapters();
+  } else {
 
-    } else {
+    hideChapters();
 
-        hideChapters();
-
-    }
+  }
 
 }
 
 
 function showChapters() {
 
-    DOM.levelSection?.classList.remove(
-        "hidden"
-    );
+  DOM.levelSection?.classList.remove(
+    "hidden"
+  );
 
-
-    DOM.levelsBtn?.setAttribute(
-        "aria-pressed",
-        "true"
-    );
+  DOM.levelsBtn?.setAttribute(
+    "aria-pressed",
+    "true"
+  );
 
 }
 
 
 function hideChapters() {
 
-    DOM.levelSection?.classList.add(
-        "hidden"
-    );
+  DOM.levelSection?.classList.add(
+    "hidden"
+  );
 
-
-    DOM.levelsBtn?.setAttribute(
-        "aria-pressed",
-        "false"
-    );
+  DOM.levelsBtn?.setAttribute(
+    "aria-pressed",
+    "false"
+  );
 
 }
 
@@ -1237,472 +1059,405 @@ function hideChapters() {
 
 function getCurrentChapterData() {
 
-    return (
+  return (
+    AppState.data[
+      AppState.currentChapter
+    ] || {
 
-        AppState.data.chapter1 || {
+      chapter:
+        AppState.currentChapter,
 
-            chapter:
-                "chapter1",
+      title:
+        getChapterTitle(
+          AppState.currentChapter
+        ),
 
-            title:
-                "الفصل الأول",
+      lessons: []
 
-            lessons:
-                []
-
-        }
-
-    );
+    }
+  );
 
 }
 
 
 function getCurrentChapterLessons() {
 
-    const chapterData =
-        getCurrentChapterData();
+  const chapterData =
+    getCurrentChapterData();
 
-
-    return Array.isArray(
-        chapterData.lessons
-    )
-        ? chapterData.lessons
-        : [];
+  return Array.isArray(
+    chapterData.lessons
+  )
+    ? chapterData.lessons
+    : [];
 
 }
 
 
 function getCurrentChapterTitle() {
 
-    return "نصوص الفصل الأول";
+  return getChapterTitle(
+    AppState.currentChapter
+  );
 
 }
 
 
 /* =========================================================
-   FILTER TEXTS
+   FILTER
 ========================================================= */
 
 function getVisibleLessons() {
 
-    let lessons =
-        getCurrentChapterLessons();
+  let lessons =
+    getCurrentChapterLessons();
 
 
-    /* SEARCH */
+  if (
+    AppState.searchQuery.trim()
+  ) {
 
-    if (
-        AppState.searchQuery.trim()
-    ) {
+    const query =
+      AppState.searchQuery
+        .toLowerCase()
+        .trim();
 
-        const query =
-            AppState.searchQuery
-                .toLowerCase()
-                .trim();
+    lessons =
+      lessons.filter(lesson => {
 
+        const title =
+          String(
+            lesson.title || ""
+          ).toLowerCase();
 
-        lessons =
-            lessons.filter(
-                lesson => {
+        const titleAr =
+          String(
+            lesson.title_ar || ""
+          ).toLowerCase();
 
-                    const title =
-                        String(
-                            lesson.title ||
-                            ""
-                        ).toLowerCase();
+        const content =
+          String(
+            lesson.content || ""
+          ).toLowerCase();
 
+        const translation =
+          String(
+            lesson.translation_ar || ""
+          ).toLowerCase();
 
-                    const titleAr =
-                        String(
-                            lesson.title_ar ||
-                            ""
-                        ).toLowerCase();
+        return (
+          title.includes(query) ||
+          titleAr.includes(query) ||
+          content.includes(query) ||
+          translation.includes(query)
+        );
 
+      });
 
-                    const content =
-                        String(
-                            lesson.content ||
-                            ""
-                        ).toLowerCase();
-
-
-                    const translation =
-                        String(
-                            lesson.translation_ar ||
-                            ""
-                        ).toLowerCase();
-
-
-                    return (
-
-                        title.includes(query) ||
-
-                        titleAr.includes(query) ||
-
-                        content.includes(query) ||
-
-                        translation.includes(query)
-
-                    );
-
-                }
-            );
-
-    }
+  }
 
 
-    /* FAVORITES */
+  if (
+    AppState.showFavoritesOnly
+  ) {
 
-    if (
-        AppState.showFavoritesOnly
-    ) {
+    lessons =
+      lessons.filter(
+        (lesson, index) =>
+          isFavorite(
+            getLessonId(
+              lesson,
+              index
+            )
+          )
+      );
 
-        lessons =
-            lessons.filter(
-                (lesson, index) =>
-                    isFavorite(
-                        getLessonId(
-                            lesson,
-                            index
-                        )
-                    )
-            );
-
-    }
+  }
 
 
-    return lessons;
+  return lessons;
 
 }
 
 
 /* =========================================================
-   RENDER TEXTS
+   RENDER LESSONS
 ========================================================= */
 
 function renderLessons() {
 
-    const lessons =
-        getVisibleLessons();
+  const lessons =
+    getVisibleLessons();
 
+  updateLessonsHeader(
+    lessons.length
+  );
 
-    updateLessonsHeader(
-        lessons.length
-    );
-
-
-    if (
-        lessons.length === 0
-    ) {
-
-        if (DOM.lessonsList) {
-
-            DOM.lessonsList.innerHTML =
-                "";
-
-        }
-
-
-        DOM.emptyState?.classList.remove(
-            "hidden"
-        );
-
-
-        return;
-
-    }
-
-
-    DOM.emptyState?.classList.add(
-        "hidden"
-    );
-
+  if (
+    lessons.length === 0
+  ) {
 
     if (DOM.lessonsList) {
-
-        DOM.lessonsList.innerHTML =
-
-            lessons
-                .map(
-                    (lesson, index) =>
-                        createLessonCard(
-                            lesson,
-                            index
-                        )
-                )
-                .join("");
-
+      DOM.lessonsList.innerHTML = "";
     }
 
+    DOM.emptyState?.classList.remove(
+      "hidden"
+    );
 
-    attachLessonEvents();
+    return;
+
+  }
+
+  DOM.emptyState?.classList.add(
+    "hidden"
+  );
+
+  if (DOM.lessonsList) {
+
+    DOM.lessonsList.innerHTML =
+      lessons
+        .map(
+          (lesson, index) =>
+            createLessonCard(
+              lesson,
+              index
+            )
+        )
+        .join("");
+
+  }
+
+  attachLessonEvents();
 
 }
 
 
 /* =========================================================
-   TEXT HEADER
+   HEADER
 ========================================================= */
 
-function updateLessonsHeader(
-    count
-) {
+function updateLessonsHeader(count) {
 
-    if (
-        AppState.showFavoritesOnly
-    ) {
+  if (
+    AppState.showFavoritesOnly
+  ) {
 
-        DOM.lessonsTitle.textContent =
-            "النصوص المفضلة";
-
-
-        DOM.lessonsSubtitle.textContent =
-            "النصوص التي حفظتها في المفضلة.";
-
-    } else {
-
-        DOM.lessonsTitle.textContent =
-            "نصوص الفصل الأول";
-
-
-        DOM.lessonsSubtitle.textContent =
-            "نصوص إنجليزية مختارة بعناية لتلاميذ السنة الرابعة متوسط، للتحضير لشهادة التعليم المتوسط وتطوير مهارات القراءة والفهم والمفردات.";
-
+    if (DOM.lessonsTitle) {
+      DOM.lessonsTitle.textContent =
+        "النصوص المفضلة";
     }
 
+    if (DOM.lessonsSubtitle) {
+      DOM.lessonsSubtitle.textContent =
+        "النصوص التي حفظتها في المفضلة.";
+    }
+
+  } else {
+
+    if (DOM.lessonsTitle) {
+      DOM.lessonsTitle.textContent =
+        getCurrentChapterTitle();
+    }
+
+    if (DOM.lessonsSubtitle) {
+      DOM.lessonsSubtitle.textContent =
+        getChapterDescription(
+          AppState.currentChapter
+        );
+    }
+
+  }
+
+  if (DOM.lessonCount) {
 
     DOM.lessonCount.textContent =
-        `${count} ${
-            count === 1
-                ? "نص"
-                : "نص"
-        }`;
+      `${count} نص`;
+
+  }
 
 }
 
 
 /* =========================================================
-   TEXT CARD
+   LESSON CARD
 ========================================================= */
 
 function createLessonCard(
-    lesson,
-    index
-)
-{
+  lesson,
+  index
+) {
 
-    const id =
-        getLessonId(
-            lesson,
-            index
-        );
+  const id =
+    getLessonId(
+      lesson,
+      index
+    );
 
+  const completed =
+    isCompleted(id);
 
-    const completed =
-        isCompleted(id);
+  const favorite =
+    isFavorite(id);
 
+  return `
 
-    const favorite =
-        isFavorite(id);
+    <article
+      class="
+        lesson-card
+        ${completed ? "completed" : ""}
+        ${favorite ? "is-favorite" : ""}
+      "
+      data-lesson-id="${escapeAttribute(id)}"
+      tabindex="0"
+      role="button"
+      aria-label="${escapeAttribute(
+        lesson.title ||
+        "فتح النص"
+      )}"
+    >
 
+      <div class="lesson-number">
 
-    return `
+        ${String(index + 1).padStart(2, "0")}
 
-        <article
+      </div>
 
-            class="
-                lesson-card
-                ${completed ? "completed" : ""}
-                ${favorite ? "is-favorite" : ""}
-            "
+      <div class="lesson-info">
 
-            data-lesson-id="${escapeAttribute(id)}"
+        <h3>
 
-            tabindex="0"
+          ${escapeHTML(
+            lesson.title ||
+            "عنوان النص"
+          )}
 
-            role="button"
+        </h3>
 
-            aria-label="${escapeAttribute(
-                lesson.title ||
-                "فتح النص"
-            )}"
+        <p>
 
-        >
+          ${escapeHTML(
+            lesson.title_ar ||
+            ""
+          )}
 
-            <div class="lesson-number">
+        </p>
 
-                ${String(
-                    index + 1
-                ).padStart(
-                    2,
-                    "0"
-                )}
+      </div>
 
-            </div>
+      <div class="lesson-status">
 
+        ${completed ? "✓" : ""}
 
-            <div class="lesson-info">
+      </div>
 
-                <h3>
+      <div class="lesson-favorite">
 
-                    ${escapeHTML(
-                        lesson.title ||
-                        "عنوان النص"
-                    )}
+        ${
+          favorite
+            ? '<span class="blue-star">★</span>'
+            : ""
+        }
 
-                </h3>
+      </div>
 
+    </article>
 
-                <p>
-
-                    ${escapeHTML(
-                        lesson.title_ar ||
-                        ""
-                    )}
-
-                </p>
-
-            </div>
-
-
-            <div class="lesson-status">
-
-                ${
-                    completed
-                        ? "✓"
-                        : ""
-                }
-
-            </div>
-
-
-       <div class="lesson-favorite">
-       
-           ${
-               favorite
-                   ? '<span class="blue-star">★</span>'
-                   : ""
-           }
-       
-       </div>
-
-        </article>
-
-    `;
+  `;
 
 }
 
 
 /* =========================================================
-   TEXT EVENTS
+   LESSON EVENTS
 ========================================================= */
 
 function attachLessonEvents() {
 
-    document
-        .querySelectorAll(
-            ".lesson-card"
-        )
-        .forEach(
-            card => {
+  document
+    .querySelectorAll(".lesson-card")
+    .forEach(card => {
 
-                card.addEventListener(
-                    "click",
-                    () => {
+      card.addEventListener(
+        "click",
+        () => {
 
-                        openLesson(
-                            card.dataset.lessonId
-                        );
+          openLesson(
+            card.dataset.lessonId
+          );
 
-                    }
-                );
+        }
+      );
 
+      card.addEventListener(
+        "keydown",
+        event => {
 
-                card.addEventListener(
-                    "keydown",
-                    event => {
+          if (
+            event.key === "Enter" ||
+            event.key === " "
+          ) {
 
-                        if (
-                            event.key === "Enter" ||
-                            event.key === " "
-                        ) {
+            event.preventDefault();
 
-                            event.preventDefault();
+            openLesson(
+              card.dataset.lessonId
+            );
 
+          }
 
-                            openLesson(
-                                card.dataset.lessonId
-                            );
+        }
+      );
 
-                        }
-
-                    }
-                );
-
-            }
-        );
+    });
 
 }
 
 
 /* =========================================================
-   OPEN TEXT
+   OPEN LESSON
 ========================================================= */
 
-function openLesson(
-    lessonId
-) {
+function openLesson(lessonId) {
 
-    const lessons =
-        getCurrentChapterLessons();
+  const lessons =
+    getCurrentChapterLessons();
 
-
-    const index =
-        lessons.findIndex(
-            (lesson, lessonIndex) =>
-                getLessonId(
-                    lesson,
-                    lessonIndex
-                ) ===
-                String(lessonId)
-        );
-
-
-    if (
-        index === -1
-    ) {
-
-        return;
-
-    }
-
-
-    AppState.currentLessonIndex =
-        index;
-
-
-    AppState.currentLesson =
-        lessons[index];
-
-
-    renderReader();
-
-
-    DOM.readerModal?.classList.remove(
-        "hidden"
-    );
-
-
-    document.body.style.overflow =
-        "hidden";
-
-
-    saveLastLesson(
+  const index =
+    lessons.findIndex(
+      (lesson, lessonIndex) =>
         getLessonId(
-            AppState.currentLesson,
-            AppState.currentLessonIndex
-        )
+          lesson,
+          lessonIndex
+        ) ===
+        String(lessonId)
     );
+
+  if (index === -1) {
+    return;
+  }
+
+  AppState.currentLessonIndex =
+    index;
+
+  AppState.currentLesson =
+    lessons[index];
+
+  renderReader();
+
+  DOM.readerModal?.classList.remove(
+    "hidden"
+  );
+
+  document.body.style.overflow =
+    "hidden";
+
+  saveLastLesson(
+    getLessonId(
+      AppState.currentLesson,
+      index
+    )
+  );
 
 }
 
@@ -1713,173 +1468,136 @@ function openLesson(
 
 function renderReader() {
 
-    const lesson =
-        AppState.currentLesson;
+  const lesson =
+    AppState.currentLesson;
+
+  if (!lesson) {
+    return;
+  }
+
+  const lessons =
+    getCurrentChapterLessons();
+
+  const index =
+    AppState.currentLessonIndex;
 
 
-    if (!lesson) {
+  const titleColors = [
+    "#4298e8",
+    "#3eb27d",
+    "#dba72d",
+    "#e27e38",
+    "#dc679a",
+    "#8060d7"
+  ];
 
-        return;
-
-    }
-
-
-    const lessons =
-        getCurrentChapterLessons();
-
-
-    const index =
-        AppState.currentLessonIndex;
-
-
-    /* TITLE COLORS */
-
-    const titleColors = [
-
-
-        
-            "#4298e8",
-            "#3eb27d",
-            "#dba72d",
-            "#e27e38",
-            "#dc679a",
-            "#8060d7"
-        
-        
-
+  const titleColor =
+    titleColors[
+      index % titleColors.length
     ];
 
 
-    const titleColor =
-        titleColors[
-            index %
-            titleColors.length
-        ];
+  if (DOM.readerLevel) {
+
+    DOM.readerLevel.textContent =
+      getChapterTitle(
+        AppState.currentChapter
+      );
+
+  }
 
 
-    /* HEADER */
+  if (DOM.readerLessonNumber) {
 
-    if (DOM.readerLevel) {
+    DOM.readerLessonNumber.textContent =
+      `النص ${index + 1}`;
 
-        DOM.readerLevel.textContent =
-            "الفصل الأول";
-
-    }
+  }
 
 
-    if (DOM.readerLessonNumber) {
+  if (DOM.readerTitle) {
 
-        DOM.readerLessonNumber.textContent =
-            `النص ${index + 1}`;
+    DOM.readerTitle.textContent =
+      lesson.title ||
+      "عنوان النص";
 
-    }
-
-
-    /* ENGLISH TITLE */
-
-    if (DOM.readerTitle) {
-
-        DOM.readerTitle.textContent =
-            lesson.title ||
-            "عنوان النص";
-
-
-        DOM.readerTitle.style.setProperty(
-            "--title-color",
-            titleColor
-        );
-
-    }
-
-
-    /* ARABIC TITLE */
-
-    if (DOM.readerTitleAr) {
-
-        DOM.readerTitleAr.textContent =
-            lesson.title_ar ||
-            "";
-
-
-        DOM.readerTitleAr.style.setProperty(
-            "--title-color",
-            titleColor
-        );
-
-    }
-
-
-    /* ENGLISH TEXT */
-
-    if (DOM.readerText) {
-
-        DOM.readerText.textContent =
-            lesson.content ||
-            "";
-
-    }
-
-
-    /* ARABIC TRANSLATION */
-
-    if (DOM.readerTranslation) {
-
-        DOM.readerTranslation.textContent =
-            lesson.translation_ar ||
-            "لا توجد ترجمة متوفرة.";
-
-    }
-
-
-    /* VOCABULARY */
-
-    renderVocabulary();
-
-
-    /* FAVORITE */
-
-    updateReaderFavoriteButton();
-
-
-    /* QUESTIONS */
-
-    renderQuestions();
-
-
-    /* NAVIGATION */
-
-    updateReaderNavigation(
-        lessons.length
+    DOM.readerTitle.style.setProperty(
+      "--title-color",
+      titleColor
     );
 
+  }
 
-    /* COMPLETED */
 
-    markAsCompleted(
-        getLessonId(
-            lesson,
-            index
-        )
+  if (DOM.readerTitleAr) {
+
+    DOM.readerTitleAr.textContent =
+      lesson.title_ar ||
+      "";
+
+    DOM.readerTitleAr.style.setProperty(
+      "--title-color",
+      titleColor
     );
+
+  }
+
+
+  if (DOM.readerText) {
+
+    DOM.readerText.textContent =
+      lesson.content ||
+      "";
+
+  }
+
+
+  if (DOM.readerTranslation) {
+
+    DOM.readerTranslation.textContent =
+      lesson.translation_ar ||
+      "لا توجد ترجمة متوفرة.";
+
+  }
+
+
+  renderVocabulary();
+
+  updateReaderFavoriteButton();
+
+  renderQuestions();
+
+  updateReaderNavigation(
+    lessons.length
+  );
+
+  markAsCompleted(
+    getLessonId(
+      lesson,
+      index
+    )
+  );
 
 }
 
 
 /* =========================================================
-   GET TEXT ID
+   LESSON ID
+   مهم حتى لا تختلط نصوص الفصول
 ========================================================= */
 
 function getLessonId(
-    lesson,
-    index
+  lesson,
+  index
 ) {
 
-    return String(
+  const originalId =
+    lesson?.id ??
+    index;
 
-        lesson?.id ??
-        `chapter1_${index}`
-
-    );
+  return String(
+    `${AppState.currentChapter}_${originalId}`
+  );
 
 }
 
@@ -1890,130 +1608,106 @@ function getLessonId(
 
 function renderVocabulary() {
 
-    const lesson =
-        AppState.currentLesson;
+  const lesson =
+    AppState.currentLesson;
 
+  if (
+    !DOM.vocabularySection ||
+    !DOM.vocabularyContainer
+  ) {
+    return;
+  }
 
-    if (
-        !DOM.vocabularySection ||
-        !DOM.vocabularyContainer
-    ) {
+  const vocabulary =
+    lesson?.vocabulary ||
+    lesson?.words ||
+    [];
 
-        return;
+  if (
+    !Array.isArray(vocabulary) ||
+    vocabulary.length === 0
+  ) {
 
-    }
-
-
-    const vocabulary =
-        lesson?.vocabulary ||
-        lesson?.words ||
-        [];
-
-
-    if (
-        !Array.isArray(vocabulary) ||
-        vocabulary.length === 0
-    ) {
-
-        DOM.vocabularySection.classList.add(
-            "hidden"
-        );
-
-
-        DOM.vocabularyContainer.innerHTML =
-            "";
-
-
-        return;
-
-    }
-
-
-    DOM.vocabularySection.classList.remove(
-        "hidden"
+    DOM.vocabularySection.classList.add(
+      "hidden"
     );
 
-
     DOM.vocabularyContainer.innerHTML =
+      "";
 
-        vocabulary
-            .map(
-                item => {
+    return;
 
-                    if (
-                        typeof item === "string"
-                    ) {
+  }
 
-                        return `
+  DOM.vocabularySection.classList.remove(
+    "hidden"
+  );
 
-                            <div class="vocabulary-item">
+  DOM.vocabularyContainer.innerHTML =
+    vocabulary
+      .map(item => {
 
-                                ${escapeHTML(item)}
+        if (
+          typeof item === "string"
+        ) {
 
-                            </div>
+          return `
+            <div class="vocabulary-item">
+              ${escapeHTML(item)}
+            </div>
+          `;
 
-                        `;
+        }
 
-                    }
+        const word =
+          item.word ||
+          item.term ||
+          "";
 
+        const translation =
+          item.translation_ar ||
+          item.arabic ||
+          item.meaning ||
+          "";
 
-                    const word =
-                        item.word ||
-                        item.term ||
-                        "";
+        const english =
+          item.translation_en ||
+          "";
 
+        return `
 
-                    const translation =
-                        item.translation_ar ||
-                        item.arabic ||
-                        item.meaning ||
-                        "";
+          <div class="vocabulary-item">
 
+            <strong>
+              ${escapeHTML(word)}
+            </strong>
 
-                    const english =
-                        item.translation_en ||
-                        "";
+            ${
+              translation
+                ? `
+                  <span>
+                    ${escapeHTML(translation)}
+                  </span>
+                `
+                : ""
+            }
 
+            ${
+              english
+                ? `
+                  <small>
+                    ${escapeHTML(english)}
+                  </small>
+                `
+                : ""
+            }
 
-                    return `
+          </div>
 
-                        <div class="vocabulary-item">
+        `;
 
-                            <strong>
-
-                                ${escapeHTML(word)}
-
-                            </strong>
-
-
-                            ${
-                                translation
-                                    ? `
-                                        <span>
-                                            ${escapeHTML(translation)}
-                                        </span>
-                                      `
-                                    : ""
-                            }
-
-
-                            ${
-                                english
-                                    ? `
-                                        <small>
-                                            ${escapeHTML(english)}
-                                        </small>
-                                      `
-                                    : ""
-                            }
-
-                        </div>
-
-                    `;
-
-                }
-            )
-            .join("");
+      })
+      .join("");
 
 }
 
@@ -2024,235 +1718,196 @@ function renderVocabulary() {
 
 function renderQuestions() {
 
-    const lesson =
-        AppState.currentLesson;
+  const lesson =
+    AppState.currentLesson;
 
+  const questions =
+    Array.isArray(
+      lesson?.questions
+    )
+      ? lesson.questions
+      : [];
 
-    const questions =
-        Array.isArray(
-            lesson?.questions
-        )
-            ? lesson.questions
-            : [];
+  if (DOM.answersContainer) {
 
+    DOM.answersContainer.classList.add(
+      "hidden"
+    );
 
-    if (
-        DOM.answersContainer
-    ) {
+    DOM.answersContainer.innerHTML =
+      "";
 
-        DOM.answersContainer.classList.add(
-            "hidden"
-        );
+  }
 
+  if (
+    questions.length === 0
+  ) {
 
-        DOM.answersContainer.innerHTML =
-            "";
+    DOM.questionsSection?.classList.add(
+      "hidden"
+    );
 
-    }
+    return;
 
+  }
 
-    if (
-        questions.length === 0
-    ) {
+  DOM.questionsSection?.classList.remove(
+    "hidden"
+  );
 
-        if (DOM.questionsSection) {
+  if (!DOM.questionsContainer) {
+    return;
+  }
 
-            DOM.questionsSection.classList.add(
-                "hidden"
-            );
+  DOM.questionsContainer.innerHTML =
+    questions
+      .map(
+        (question, index) => {
+
+          const text =
+            typeof question === "string"
+              ? question
+              : question?.question || "";
+
+          const answer =
+            typeof question === "string"
+              ? ""
+              : question?.answer || "";
+
+          return `
+
+            <div
+              class="question-card"
+              data-index="${index}"
+            >
+
+              <div
+                class="question-header"
+                tabindex="0"
+                role="button"
+                aria-expanded="false"
+              >
+
+                <span class="question-number">
+
+                  Question ${index + 1}
+
+                </span>
+
+                <div
+                  class="question-text"
+                  dir="ltr"
+                >
+
+                  ${escapeHTML(text)}
+
+                </div>
+
+              </div>
+
+              <div
+                class="user-answer-section"
+                dir="ltr"
+              >
+
+                <label>
+                  Your Answer
+                </label>
+
+                <textarea
+                  class="user-answer-input"
+                  placeholder="Write your answer here..."
+                  rows="3"
+                  spellcheck="true"
+                ></textarea>
+
+              </div>
+
+              <div
+                class="question-answer hidden"
+                dir="ltr"
+              >
+
+                ${escapeHTML(answer)}
+
+              </div>
+
+            </div>
+
+          `;
 
         }
+      )
+      .join("");
 
 
-        return;
+  DOM.questionsContainer
+    .querySelectorAll(
+      ".question-header"
+    )
+    .forEach(header => {
 
-    }
+      header.addEventListener(
+        "click",
+        () => {
 
+          const card =
+            header.closest(
+              ".question-card"
+            );
 
-    if (DOM.questionsSection) {
+          const answer =
+            card?.querySelector(
+              ".question-answer"
+            );
 
-        DOM.questionsSection.classList.remove(
-            "hidden"
-        );
+          if (!answer) {
+            return;
+          }
 
-    }
+          const isHidden =
+            answer.classList.contains(
+              "hidden"
+            );
 
+          answer.classList.toggle(
+            "hidden",
+            !isHidden
+          );
 
-    if (!DOM.questionsContainer) {
+          header.setAttribute(
+            "aria-expanded",
+            String(isHidden)
+          );
 
-        return;
+          card.classList.toggle(
+            "has-answer",
+            isHidden
+          );
 
-    }
+        }
+      );
 
 
-    DOM.questionsContainer.innerHTML =
+      header.addEventListener(
+        "keydown",
+        event => {
 
-        questions
-            .map(
-                (question, index) => {
+          if (
+            event.key === "Enter" ||
+            event.key === " "
+          ) {
 
-                    const text =
-                        typeof question === "string"
-                            ? question
-                            : question?.question || "";
+            event.preventDefault();
 
+            header.click();
 
-                    const answer =
-                        typeof question === "string"
-                            ? ""
-                            : question?.answer || "";
+          }
 
+        }
+      );
 
-                    return `
-
-                        <div
-                            class="question-card"
-                            data-index="${index}"
-                        >
-
-                            <div
-                                class="question-header"
-                                tabindex="0"
-                                role="button"
-                                aria-expanded="false"
-                            >
-
-                                <span class="question-number">
-
-                                    Question ${index + 1}
-
-                                </span>
-
-
-                                <div
-                                    class="question-text"
-                                    dir="ltr"
-                                >
-
-                                    ${escapeHTML(text)}
-
-                                </div>
-
-                            </div>
-
-
-                            <div
-                                class="user-answer-section"
-                                dir="ltr"
-                            >
-
-                                <label>
-
-                                    Your Answer
-
-                                </label>
-
-
-                                <textarea
-                                    class="user-answer-input"
-                                    placeholder="Write your answer here..."
-                                    rows="3"
-                                    spellcheck="true"
-                                ></textarea>
-
-                            </div>
-
-
-                            <div
-                                class="question-answer hidden"
-                                dir="ltr"
-                            >
-
-                                ${escapeHTML(answer)}
-
-                            </div>
-
-                        </div>
-
-                    `;
-
-                }
-            )
-            .join("");
-
-
-    DOM.questionsContainer
-        .querySelectorAll(
-            ".question-header"
-        )
-        .forEach(
-            header => {
-
-                header.addEventListener(
-                    "click",
-                    () => {
-
-                        const card =
-                            header.closest(
-                                ".question-card"
-                            );
-
-
-                        const answer =
-                            card?.querySelector(
-                                ".question-answer"
-                            );
-
-
-                        if (!answer) {
-
-                            return;
-
-                        }
-
-
-                        const isHidden =
-                            answer.classList.contains(
-                                "hidden"
-                            );
-
-
-                        answer.classList.toggle(
-                            "hidden",
-                            !isHidden
-                        );
-
-
-                        header.setAttribute(
-                            "aria-expanded",
-                            String(isHidden)
-                        );
-
-
-                        card.classList.toggle(
-                            "has-answer",
-                            isHidden
-                        );
-
-                    }
-                );
-
-
-                header.addEventListener(
-                    "keydown",
-                    event => {
-
-                        if (
-                            event.key === "Enter" ||
-                            event.key === " "
-                        ) {
-
-                            event.preventDefault();
-
-                            header.click();
-
-                        }
-
-                    }
-                );
-
-            }
-        );
+    });
 
 }
 
@@ -2262,107 +1917,91 @@ function renderQuestions() {
 ========================================================= */
 
 function updateReaderNavigation(
-    totalLessons
+  totalLessons
 ) {
 
-    if (DOM.currentPosition) {
+  if (DOM.currentPosition) {
 
-        DOM.currentPosition.textContent =
-            `${AppState.currentLessonIndex + 1} / ${totalLessons}`;
+    DOM.currentPosition.textContent =
+      `${AppState.currentLessonIndex + 1} / ${totalLessons}`;
 
-    }
+  }
 
+  if (DOM.prevLessonBtn) {
 
-    if (DOM.prevLessonBtn) {
+    DOM.prevLessonBtn.disabled =
+      AppState.currentLessonIndex <= 0;
 
-        DOM.prevLessonBtn.disabled =
-            AppState.currentLessonIndex <= 0;
+  }
 
-    }
+  if (DOM.nextLessonBtn) {
 
+    DOM.nextLessonBtn.disabled =
+      AppState.currentLessonIndex >=
+      totalLessons - 1;
 
-    if (DOM.nextLessonBtn) {
-
-        DOM.nextLessonBtn.disabled =
-            AppState.currentLessonIndex >=
-            totalLessons - 1;
-
-    }
+  }
 
 }
 
 
 function previousLesson() {
 
-    if (
-        AppState.currentLessonIndex <= 0
-    ) {
+  if (
+    AppState.currentLessonIndex <= 0
+  ) {
+    return;
+  }
 
-        return;
+  AppState.currentLessonIndex--;
 
-    }
+  const lessons =
+    getCurrentChapterLessons();
 
+  AppState.currentLesson =
+    lessons[
+      AppState.currentLessonIndex
+    ];
 
-    AppState.currentLessonIndex--;
+  saveLastLesson(
+    getLessonId(
+      AppState.currentLesson,
+      AppState.currentLessonIndex
+    )
+  );
 
-
-    const lessons =
-        getCurrentChapterLessons();
-
-
-    AppState.currentLesson =
-        lessons[
-            AppState.currentLessonIndex
-        ];
-
-
-    saveLastLesson(
-        getLessonId(
-            AppState.currentLesson,
-            AppState.currentLessonIndex
-        )
-    );
-
-
-    renderReader();
+  renderReader();
 
 }
 
 
 function nextLesson() {
 
-    const lessons =
-        getCurrentChapterLessons();
+  const lessons =
+    getCurrentChapterLessons();
 
+  if (
+    AppState.currentLessonIndex >=
+    lessons.length - 1
+  ) {
+    return;
+  }
 
-    if (
-        AppState.currentLessonIndex >=
-        lessons.length - 1
-    ) {
+  AppState.currentLessonIndex++;
 
-        return;
+  AppState.currentLesson =
+    lessons[
+      AppState.currentLessonIndex
+    ];
 
-    }
+  saveLastLesson(
+    getLessonId(
+      AppState.currentLesson,
+      AppState.currentLessonIndex
+    )
+  );
 
-
-    AppState.currentLessonIndex++;
-
-
-    AppState.currentLesson =
-        lessons[
-            AppState.currentLessonIndex
-        ];
-
-
-    saveLastLesson(
-        getLessonId(
-            AppState.currentLesson,
-            AppState.currentLessonIndex
-        )
-    );
-
-
-    renderReader();
+  renderReader();
 
 }
 
@@ -2373,16 +2012,14 @@ function nextLesson() {
 
 function closeReader() {
 
-    stopSpeech();
+  stopSpeech();
 
+  DOM.readerModal?.classList.add(
+    "hidden"
+  );
 
-    DOM.readerModal?.classList.add(
-        "hidden"
-    );
-
-
-    document.body.style.overflow =
-        "";
+  document.body.style.overflow =
+    "";
 
 }
 
@@ -2391,219 +2028,176 @@ function closeReader() {
    FAVORITES
 ========================================================= */
 
-function isFavorite(
-    lessonId
-) {
+function isFavorite(lessonId) {
 
-    return AppState.favorites.includes(
-        String(lessonId)
-    );
+  return AppState.favorites.includes(
+    String(lessonId)
+  );
 
 }
 
 
-function toggleFavorite(
-    lessonId
-) {
+function toggleFavorite(lessonId) {
 
-    const id =
-        String(lessonId);
+  const id =
+    String(lessonId);
 
+  if (
+    isFavorite(id)
+  ) {
 
-    if (
-        isFavorite(id)
-    ) {
+    AppState.favorites =
+      AppState.favorites.filter(
+        item => item !== id
+      );
 
-        AppState.favorites =
-            AppState.favorites.filter(
-                item =>
-                    item !== id
-            );
+    showToast(
+      "تمت إزالة النص من المفضلة"
+    );
 
+  } else {
 
-        showToast(
-            "تمت إزالة النص من المفضلة"
-        );
+    AppState.favorites.push(id);
 
-    } else {
+    showToast(
+      "تمت إضافة النص إلى المفضلة ☆"
+    );
 
-        AppState.favorites.push(
-            id
-        );
+  }
 
+  saveStorage();
 
-        showToast(
-            "تمت إضافة النص إلى المفضلة ☆"
-        );
+  updateFavoritesButton();
 
-    }
+  updateReaderFavoriteButton();
 
-
-    saveStorage();
-
-    updateFavoritesButton();
-
-    updateReaderFavoriteButton();
-
-    renderLessons();
+  renderLessons();
 
 }
 
 
 function toggleCurrentFavorite() {
 
-    if (
-        !AppState.currentLesson
-    ) {
+  if (
+    !AppState.currentLesson
+  ) {
+    return;
+  }
 
-        return;
-
-    }
-
-
-    toggleFavorite(
-        getLessonId(
-            AppState.currentLesson,
-            AppState.currentLessonIndex
-        )
-    );
+  toggleFavorite(
+    getLessonId(
+      AppState.currentLesson,
+      AppState.currentLessonIndex
+    )
+  );
 
 }
 
 
 function updateReaderFavoriteButton() {
 
-    if (
-        !AppState.currentLesson ||
-        !DOM.readerFavoriteBtn
-    ) {
+  if (
+    !AppState.currentLesson ||
+    !DOM.readerFavoriteBtn
+  ) {
+    return;
+  }
 
-        return;
-
-    }
-
-
-    const favorite =
-        isFavorite(
-            getLessonId(
-                AppState.currentLesson,
-                AppState.currentLessonIndex
-            )
-        );
-
-
-    DOM.readerFavoriteBtn.textContent =
-  favorite ? "★" : "☆";
-
-DOM.readerFavoriteBtn.style.color =
-  "#3B82F6";
-
-    DOM.readerFavoriteBtn.setAttribute(
-        "aria-pressed",
-        String(favorite)
+  const favorite =
+    isFavorite(
+      getLessonId(
+        AppState.currentLesson,
+        AppState.currentLessonIndex
+      )
     );
 
+  DOM.readerFavoriteBtn.textContent =
+    favorite ? "★" : "☆";
 
-    DOM.readerFavoriteBtn.setAttribute(
-        "aria-label",
-        favorite
-            ? "إزالة النص من المفضلة"
-            : "إضافة النص إلى المفضلة"
-    );
+  DOM.readerFavoriteBtn.style.color =
+    "#3B82F6";
+
+  DOM.readerFavoriteBtn.setAttribute(
+    "aria-pressed",
+    String(favorite)
+  );
+
+  DOM.readerFavoriteBtn.setAttribute(
+    "aria-label",
+    favorite
+      ? "إزالة النص من المفضلة"
+      : "إضافة النص إلى المفضلة"
+  );
 
 }
 
 
 function toggleFavorites() {
 
-    AppState.showFavoritesOnly =
-        !AppState.showFavoritesOnly;
+  AppState.showFavoritesOnly =
+    !AppState.showFavoritesOnly;
 
+  AppState.searchQuery =
+    "";
 
-    AppState.searchQuery =
-        "";
+  if (DOM.searchInput) {
+    DOM.searchInput.value = "";
+  }
 
+  updateFavoritesButton();
 
-    if (DOM.searchInput) {
-
-        DOM.searchInput.value =
-            "";
-
-    }
-
-
-    updateFavoritesButton();
-
-    renderLessons();
+  renderLessons();
 
 }
 
 
 function updateFavoritesButton() {
 
-    const active =
-        AppState.showFavoritesOnly;
+  if (!DOM.favoritesBtn) {
+    return;
+  }
 
+  const active =
+    AppState.showFavoritesOnly;
 
-    if (!DOM.favoritesBtn) {
+  DOM.favoritesBtn.textContent =
+    active ? " ★" : "☆";
 
-        return;
-
-    }
-
-
-    DOM.favoritesBtn.textContent =
-        active
-            ? " ★"
-            : "☆";
-
-
-    DOM.favoritesBtn.setAttribute(
-        "aria-pressed",
-        String(active)
-    );
+  DOM.favoritesBtn.setAttribute(
+    "aria-pressed",
+    String(active)
+  );
 
 }
 
 
 /* =========================================================
-   COMPLETED TEXTS
+   COMPLETED
 ========================================================= */
 
-function isCompleted(
-    lessonId
-) {
+function isCompleted(lessonId) {
 
-    return AppState.completed.includes(
-        String(lessonId)
-    );
+  return AppState.completed.includes(
+    String(lessonId)
+  );
 
 }
 
 
-function markAsCompleted(
-    lessonId
-) {
+function markAsCompleted(lessonId) {
 
-    const id =
-        String(lessonId);
+  const id =
+    String(lessonId);
 
+  if (
+    isCompleted(id)
+  ) {
+    return;
+  }
 
-    if (
-        isCompleted(id)
-    ) {
+  AppState.completed.push(id);
 
-        return;
-
-    }
-
-
-    AppState.completed.push(
-        id
-    );
-
-
-    saveStorage();
+  saveStorage();
 
 }
 
@@ -2614,74 +2208,57 @@ function markAsCompleted(
 
 function toggleSearch() {
 
-    if (!DOM.searchPanel) {
+  if (!DOM.searchPanel) {
+    return;
+  }
 
-        return;
-
-    }
-
-
-    const hidden =
-        DOM.searchPanel.classList.contains(
-            "hidden"
-        );
-
-
-    DOM.searchPanel.classList.toggle(
-        "hidden",
-        !hidden
+  const hidden =
+    DOM.searchPanel.classList.contains(
+      "hidden"
     );
 
+  DOM.searchPanel.classList.toggle(
+    "hidden",
+    !hidden
+  );
 
-    DOM.searchBtn?.setAttribute(
-        "aria-expanded",
-        String(hidden)
-    );
+  DOM.searchBtn?.setAttribute(
+    "aria-expanded",
+    String(hidden)
+  );
 
-
-    if (hidden) {
-
-        DOM.searchInput?.focus();
-
-    }
+  if (hidden) {
+    DOM.searchInput?.focus();
+  }
 
 }
 
 
-function handleSearch(
-    event
-) {
+function handleSearch(event) {
 
-    AppState.searchQuery =
-        event.target.value;
+  AppState.searchQuery =
+    event.target.value;
 
+  AppState.showFavoritesOnly =
+    false;
 
-    AppState.showFavoritesOnly =
-        false;
+  updateFavoritesButton();
 
-
-    updateFavoritesButton();
-
-    renderLessons();
+  renderLessons();
 
 }
 
 
 function clearSearch() {
 
-    if (DOM.searchInput) {
+  if (DOM.searchInput) {
+    DOM.searchInput.value = "";
+  }
 
-        DOM.searchInput.value =
-            "";
+  AppState.searchQuery =
+    "";
 
-    }
-
-
-    AppState.searchQuery =
-        "";
-
-
-    renderLessons();
+  renderLessons();
 
 }
 
@@ -2692,11 +2269,17 @@ function clearSearch() {
 
 function speakCurrentLesson() {
 
-  if (!AppState.currentLesson) return;
+  if (!AppState.currentLesson) {
+    return;
+  }
 
-  if (!("speechSynthesis" in window)) {
+  if (
+    !("speechSynthesis" in window)
+  ) {
 
-    showToast("القراءة الصوتية غير مدعومة.");
+    showToast(
+      "القراءة الصوتية غير مدعومة."
+    );
 
     return;
 
@@ -2704,97 +2287,97 @@ function speakCurrentLesson() {
 
   window.speechSynthesis.cancel();
 
-  const utterance = new SpeechSynthesisUtterance(
-    AppState.currentLesson.content || ""
-  );
+  const utterance =
+    new SpeechSynthesisUtterance(
+      AppState.currentLesson.content || ""
+    );
 
-  utterance.lang = "en-US";
+  utterance.lang =
+    "en-US";
 
-  utterance.rate = speechRate;
+  utterance.rate =
+    speechRate;
 
-  utterance.pitch = 1;
+  utterance.pitch =
+    1;
 
-  utterance.volume = 1;
+  utterance.volume =
+    1;
 
   utterance.onstart = () => {
-
     AppState.isSpeaking = true;
-
   };
 
   utterance.onend = () => {
-
     AppState.isSpeaking = false;
-
   };
 
   utterance.onerror = () => {
-
     AppState.isSpeaking = false;
-
   };
 
-  window.speechSynthesis.speak(utterance);
+  window.speechSynthesis.speak(
+    utterance
+  );
 
 }
 
+
 function stopSpeech() {
 
-  if ("speechSynthesis" in window) {
+  if (
+    "speechSynthesis" in window
+  ) {
 
     window.speechSynthesis.cancel();
 
   }
 
-  AppState.isSpeaking = false;
+  AppState.isSpeaking =
+    false;
 
 }
 
+
 /* =========================================================
-   OPEN CURRENT TEXT ON WEB
+   OPEN CURRENT LESSON ON WEB
 ========================================================= */
 
 function openCurrentLessonOnWeb() {
 
-    if (
-        !AppState.currentLesson
-    ) {
-
-        window.open(
-            "https://alaska-sahari.github.io/English-4MS-/",
-            "_blank"
-        );
-
-        return;
-
-    }
-
-
-    const lessonId =
-        getLessonId(
-            AppState.currentLesson,
-            AppState.currentLessonIndex
-        );
-
-
-    const chapter =
-        "chapter1";
-
-
-    const url =
-        "https://alaska-sahari.github.io/English-4MS-/" +
-        `?chapter=${encodeURIComponent(chapter)}` +
-        `&lesson=${encodeURIComponent(lessonId)}`;
-
+  if (
+    !AppState.currentLesson
+  ) {
 
     window.open(
-        url,
-        "_blank"
+      "https://alaska-sahari.github.io/English-4MS-/",
+      "_blank"
     );
 
+    return;
+
+  }
+
+  const lessonId =
+    getLessonId(
+      AppState.currentLesson,
+      AppState.currentLessonIndex
+    );
+
+  const chapter =
+    AppState.currentChapter;
+
+  const url =
+    "https://alaska-sahari.github.io/English-4MS-/" +
+    `?chapter=${encodeURIComponent(chapter)}` +
+    `&lesson=${encodeURIComponent(lessonId)}`;
+
+  window.open(
+    url,
+    "_blank"
+  );
+
 }
-
-
 
 
 /* =========================================================
@@ -2803,40 +2386,36 @@ function openCurrentLessonOnWeb() {
 
 function openMenu() {
 
-    DOM.sideMenu?.classList.add(
-        "open"
-    );
+  DOM.sideMenu?.classList.add(
+    "open"
+  );
 
+  DOM.menuOverlay?.classList.add(
+    "open"
+  );
 
-    DOM.menuOverlay?.classList.add(
-        "open"
-    );
-
-
-    DOM.menuBtn?.setAttribute(
-        "aria-expanded",
-        "true"
-    );
+  DOM.menuBtn?.setAttribute(
+    "aria-expanded",
+    "true"
+  );
 
 }
 
 
 function closeMenu() {
 
-    DOM.sideMenu?.classList.remove(
-        "open"
-    );
+  DOM.sideMenu?.classList.remove(
+    "open"
+  );
 
+  DOM.menuOverlay?.classList.remove(
+    "open"
+  );
 
-    DOM.menuOverlay?.classList.remove(
-        "open"
-    );
-
-
-    DOM.menuBtn?.setAttribute(
-        "aria-expanded",
-        "false"
-    );
+  DOM.menuBtn?.setAttribute(
+    "aria-expanded",
+    "false"
+  );
 
 }
 
@@ -2845,99 +2424,83 @@ function closeMenu() {
    SIDE NAVIGATION
 ========================================================= */
 
-function handleSideNavigation(
-    event
-) {
+function handleSideNavigation(event) {
 
-    const button =
-        event.currentTarget;
+  const button =
+    event.currentTarget;
 
+  const view =
+    button.dataset.view;
 
-    const view =
-        button.dataset.view;
+  document
+    .querySelectorAll(".side-nav-item")
+    .forEach(item => {
 
-
-    document
-        .querySelectorAll(
-            ".side-nav-item"
-        )
-        .forEach(
-            item => {
-
-                item.classList.remove(
-                    "active"
-                );
-
-
-                item.removeAttribute(
-                    "aria-current"
-                );
-
-            }
-        );
-
-
-    button.classList.add(
+      item.classList.remove(
         "active"
-    );
+      );
+
+      item.removeAttribute(
+        "aria-current"
+      );
+
+    });
+
+  button.classList.add(
+    "active"
+  );
+
+  button.setAttribute(
+    "aria-current",
+    "page"
+  );
 
 
-    button.setAttribute(
-        "aria-current",
-        "page"
-    );
+  if (
+    view === "favorites"
+  ) {
+
+    AppState.showFavoritesOnly =
+      true;
+
+    AppState.completedOnly =
+      false;
+
+  }
 
 
-    if (
-        view === "favorites"
-    ) {
+  if (
+    view === "lessons"
+  ) {
 
-        AppState.showFavoritesOnly =
-            true;
+    AppState.showFavoritesOnly =
+      false;
 
+    AppState.completedOnly =
+      false;
 
-        AppState.completedOnly =
-            false;
-
-    }
-
-
-    if (
-        view === "lessons"
-    ) {
-
-        AppState.showFavoritesOnly =
-            false;
+  }
 
 
-        AppState.completedOnly =
-            false;
+  if (
+    view === "progress"
+  ) {
 
-    }
+    AppState.showFavoritesOnly =
+      false;
 
+    AppState.completedOnly =
+      false;
 
-    if (
-        view === "progress"
-    ) {
+    showProgressInfo();
 
-        AppState.showFavoritesOnly =
-            false;
+  }
 
+  updateFavoritesButton();
 
-        AppState.completedOnly =
-            false;
+  renderLessons();
 
-
-        showProgressInfo();
-
-    }
-
-
-    updateFavoritesButton();
-
-    renderLessons();
-
-    closeMenu();
+  closeMenu();
 
 }
 
@@ -2948,166 +2511,158 @@ function handleSideNavigation(
 
 function showProgressInfo() {
 
-    const total =
-        getTotalLessons();
+  const total =
+    getTotalLessons();
 
-
-    const completed =
-        getCurrentChapterLessons()
-            .filter(
-                (lesson, index) =>
-                    isCompleted(
-                        getLessonId(
-                            lesson,
-                            index
-                        )
-                    )
+  const completed =
+    getCurrentChapterLessons()
+      .filter(
+        (lesson, index) =>
+          isCompleted(
+            getLessonId(
+              lesson,
+              index
             )
-            .length;
+          )
+      )
+      .length;
 
+  const percentage =
+    total > 0
+      ? Math.round(
+          (completed / total) * 100
+        )
+      : 0;
 
-    const percentage =
-        total > 0
-            ? Math.round(
-                (
-                    completed /
-                    total
-                ) * 100
-            )
-            : 0;
-
-
-    showToast(
-        `تقدمك: ${completed} / ${total} (${percentage}%)`
-    );
+  showToast(
+    `تقدمك: ${completed} / ${total} (${percentage}%)`
+  );
 
 }
 
 
 function getTotalLessons() {
 
-    return getCurrentChapterLessons()
-        .length;
+  return getCurrentChapterLessons()
+    .length;
 
 }
 
 
 /* =========================================================
-   CONTINUE LAST TEXT
+   CONTINUE LAST LESSON
 ========================================================= */
 
 function continueLastLesson() {
 
-    const lastLessonId =
-        localStorage.getItem(
-            CONFIG.STORAGE_KEYS.LAST_LESSON
-        );
-
-
-    if (
-        !lastLessonId
-    ) {
-
-        showToast(
-            "لا يوجد نص سابق للمتابعة."
-        );
-
-
-        closeMenu();
-
-        return;
-
-    }
-
-
-    const lessons =
-        getCurrentChapterLessons();
-
-
-    const index =
-        lessons.findIndex(
-            (lesson, lessonIndex) =>
-                getLessonId(
-                    lesson,
-                    lessonIndex
-                ) ===
-                String(lastLessonId)
-        );
-
-
-    if (
-        index === -1
-    ) {
-
-        showToast(
-            "تعذر العثور على النص السابق."
-        );
-
-
-        closeMenu();
-
-        return;
-
-    }
-
-
-    AppState.currentChapter =
-        "chapter1";
-
-
-    AppState.currentLessonIndex =
-        index;
-
-
-    AppState.currentLesson =
-        lessons[index];
-
-
-    AppState.showFavoritesOnly =
-        false;
-
-
-    saveStorage();
-
-    updateActiveChapter();
-
-    renderLessons();
-
-    renderReader();
-
-
-    DOM.readerModal?.classList.remove(
-        "hidden"
+  const lastLessonId =
+    localStorage.getItem(
+      CONFIG.STORAGE_KEYS.LAST_LESSON
     );
 
+  const lastChapter =
+    localStorage.getItem(
+      CONFIG.STORAGE_KEYS.LAST_CHAPTER
+    ) ||
+    AppState.currentChapter;
 
-    document.body.style.overflow =
-        "hidden";
+  if (!lastLessonId) {
 
+    showToast(
+      "لا يوجد نص سابق للمتابعة."
+    );
 
     closeMenu();
+
+    return;
+
+  }
+
+  if (
+    CONFIG.CHAPTERS.includes(
+      lastChapter
+    )
+  ) {
+
+    AppState.currentChapter =
+      lastChapter;
+
+  }
+
+  const lessons =
+    getCurrentChapterLessons();
+
+  const index =
+    lessons.findIndex(
+      (lesson, lessonIndex) =>
+        getLessonId(
+          lesson,
+          lessonIndex
+        ) ===
+        String(lastLessonId)
+    );
+
+  if (index === -1) {
+
+    showToast(
+      "تعذر العثور على النص السابق."
+    );
+
+    closeMenu();
+
+    return;
+
+  }
+
+  AppState.currentLessonIndex =
+    index;
+
+  AppState.currentLesson =
+    lessons[index];
+
+  AppState.showFavoritesOnly =
+    false;
+
+  saveStorage();
+
+  updateActiveChapter();
+
+  renderLessons();
+
+  renderReader();
+
+  DOM.readerModal?.classList.remove(
+    "hidden"
+  );
+
+  document.body.style.overflow =
+    "hidden";
+
+  closeMenu();
 
 }
 
 
 /* =========================================================
-   SAVE LAST TEXT
+   SAVE LAST LESSON
 ========================================================= */
 
-function saveLastLesson(
-    lessonId
-) {
+function saveLastLesson(lessonId) {
 
-    localStorage.setItem(
-        CONFIG.STORAGE_KEYS.LAST_LESSON,
-        String(lessonId)
-    );
+  localStorage.setItem(
+    CONFIG.STORAGE_KEYS.LAST_LESSON,
+    String(lessonId)
+  );
 
+  localStorage.setItem(
+    CONFIG.STORAGE_KEYS.LAST_CHAPTER,
+    AppState.currentChapter
+  );
 
-    localStorage.setItem(
-        CONFIG.STORAGE_KEYS.CHAPTER,
-        "chapter1"
-    );
+  localStorage.setItem(
+    CONFIG.STORAGE_KEYS.CHAPTER,
+    AppState.currentChapter
+  );
 
 }
 
@@ -3118,50 +2673,47 @@ function saveLastLesson(
 
 function resetProgress() {
 
-    openResetModal();
+  openResetModal();
 
 }
 
 
 function openResetModal() {
 
-    resetModal?.classList.remove(
-        "hidden"
-    );
+  resetModal?.classList.remove(
+    "hidden"
+  );
 
 }
 
 
 function closeResetModal() {
 
-    resetModal?.classList.add(
-        "hidden"
-    );
+  resetModal?.classList.add(
+    "hidden"
+  );
 
 }
 
 
 function confirmReset() {
 
-    AppState.completed =
-        [];
+  AppState.completed =
+    [];
 
+  localStorage.removeItem(
+    CONFIG.STORAGE_KEYS.COMPLETED
+  );
 
-    localStorage.removeItem(
-        CONFIG.STORAGE_KEYS.COMPLETED
-    );
+  saveStorage();
 
+  renderLessons();
 
-    saveStorage();
+  closeResetModal();
 
-    renderLessons();
-
-    closeResetModal();
-
-
-    showToast(
-        "تمت إعادة ضبط التقدم."
-    );
+  showToast(
+    "تمت إعادة ضبط التقدم."
+  );
 
 }
 
@@ -3170,194 +2722,163 @@ function confirmReset() {
    KEYBOARD
 ========================================================= */
 
-function handleKeyboard(
-    event
-) {
+function handleKeyboard(event) {
+
+  if (
+    event.key === "Escape"
+  ) {
 
     if (
-        event.key === "Escape"
+      DOM.readerModal &&
+      !DOM.readerModal.classList.contains(
+        "hidden"
+      )
     ) {
 
-        if (
-            DOM.readerModal &&
-            !DOM.readerModal.classList.contains("hidden")
-        ) {
-
-            closeReader();
-
-            return;
-
-        }
-
-
-        if (
-            resetModal &&
-            !resetModal.classList.contains("hidden")
-        ) {
-
-            closeResetModal();
-
-            return;
-
-        }
-
-
-        closeMenu();
+      closeReader();
+      return;
 
     }
 
-
     if (
-        DOM.readerModal?.classList.contains(
-            "hidden"
-        )
+      resetModal &&
+      !resetModal.classList.contains(
+        "hidden"
+      )
     ) {
 
-        return;
+      closeResetModal();
+      return;
 
     }
 
+    closeMenu();
 
-    if (
-        event.key === "ArrowLeft"
-    ) {
-
-        previousLesson();
-
-    }
+  }
 
 
-    if (
-        event.key === "ArrowRight"
-    ) {
+  if (
+    DOM.readerModal?.classList.contains(
+      "hidden"
+    )
+  ) {
+    return;
+  }
 
-        nextLesson();
 
-    }
+  if (
+    event.key === "ArrowLeft"
+  ) {
+
+    previousLesson();
+
+  }
+
+
+  if (
+    event.key === "ArrowRight"
+  ) {
+
+    nextLesson();
+
+  }
 
 }
 
 
 /* =========================================================
-   SWIPE NAVIGATION — MOBILE
+   SWIPE NAVIGATION
 ========================================================= */
 
-let touchStartX =
-    0;
-
-
-let touchStartY =
-    0;
-
+let touchStartX = 0;
+let touchStartY = 0;
 
 document.addEventListener(
-    "touchstart",
-    event => {
+  "touchstart",
+  event => {
 
-        if (
-            !DOM.readerModal ||
-            DOM.readerModal.classList.contains("hidden")
-        ) {
-
-            return;
-
-        }
-
-
-        const touch =
-            event.changedTouches[0];
-
-
-        touchStartX =
-            touch.clientX;
-
-
-        touchStartY =
-            touch.clientY;
-
-    },
-    {
-        passive: true
+    if (
+      !DOM.readerModal ||
+      DOM.readerModal.classList.contains(
+        "hidden"
+      )
+    ) {
+      return;
     }
+
+    const touch =
+      event.changedTouches[0];
+
+    touchStartX =
+      touch.clientX;
+
+    touchStartY =
+      touch.clientY;
+
+  },
+  {
+    passive: true
+  }
 );
 
 
 document.addEventListener(
-    "touchend",
-    event => {
+  "touchend",
+  event => {
 
-        if (
-            !DOM.readerModal ||
-            DOM.readerModal.classList.contains("hidden")
-        ) {
-
-            return;
-
-        }
-
-
-        const touch =
-            event.changedTouches[0];
-
-
-        const touchEndX =
-            touch.clientX;
-
-
-        const touchEndY =
-            touch.clientY;
-
-
-        const deltaX =
-            touchEndX -
-            touchStartX;
-
-
-        const deltaY =
-            touchEndY -
-            touchStartY;
-
-
-        if (
-            Math.abs(deltaY) >
-            Math.abs(deltaX)
-        ) {
-
-            return;
-
-        }
-
-
-        const SWIPE_THRESHOLD =
-            60;
-
-
-        if (
-            Math.abs(deltaX) <
-            SWIPE_THRESHOLD
-        ) {
-
-            return;
-
-        }
-
-
-        if (
-            deltaX < 0
-        ) {
-
-            previousLesson();
-
-        } else {
-
-            nextLesson();
-
-        }
-
-    },
-    {
-        passive: true
+    if (
+      !DOM.readerModal ||
+      DOM.readerModal.classList.contains(
+        "hidden"
+      )
+    ) {
+      return;
     }
+
+    const touch =
+      event.changedTouches[0];
+
+    const deltaX =
+      touch.clientX -
+      touchStartX;
+
+    const deltaY =
+      touch.clientY -
+      touchStartY;
+
+    if (
+      Math.abs(deltaY) >
+      Math.abs(deltaX)
+    ) {
+      return;
+    }
+
+    const SWIPE_THRESHOLD =
+      60;
+
+    if (
+      Math.abs(deltaX) <
+      SWIPE_THRESHOLD
+    ) {
+      return;
+    }
+
+    if (
+      deltaX < 0
+    ) {
+
+      previousLesson();
+
+    } else {
+
+      nextLesson();
+
+    }
+
+  },
+  {
+    passive: true
+  }
 );
 
 
@@ -3367,116 +2888,130 @@ document.addEventListener(
 
 function loadTheme() {
 
-    const savedTheme =
-        localStorage.getItem(
-            CONFIG.STORAGE_KEYS.THEME
-        );
+  const savedTheme =
+    localStorage.getItem(
+      CONFIG.STORAGE_KEYS.THEME
+    );
 
-
-    document.documentElement.dataset.theme =
-        savedTheme || "light";
+  document.documentElement.dataset.theme =
+    savedTheme || "light";
 
 }
 
 
 function toggleTheme() {
 
-    const currentTheme =
-        document.documentElement.dataset.theme;
+  const currentTheme =
+    document.documentElement.dataset.theme;
 
+  const newTheme =
+    currentTheme === "dark"
+      ? "light"
+      : "dark";
 
-    const newTheme =
-        currentTheme === "dark"
-            ? "light"
-            : "dark";
+  document.documentElement.dataset.theme =
+    newTheme;
 
+  localStorage.setItem(
+    CONFIG.STORAGE_KEYS.THEME,
+    newTheme
+  );
 
-    document.documentElement.dataset.theme =
-        newTheme;
-
-
-    localStorage.setItem(
-        CONFIG.STORAGE_KEYS.THEME,
-        newTheme
-    );
-
-
-    updateThemeButton();
+  updateThemeButton();
 
 }
 
 
 function updateThemeButton() {
 
-    if (
-        !themeToggleBtn
-    ) {
+  if (!themeToggleBtn) {
+    return;
+  }
 
-        return;
+  const theme =
+    document.documentElement.dataset.theme;
 
-    }
+  const icon =
+    themeToggleBtn.querySelector(
+      "span:first-child"
+    );
 
+  const text =
+    themeToggleBtn.querySelector(
+      "span:last-child"
+    );
 
-    const theme =
-        document.documentElement.dataset.theme;
+  if (icon) {
 
+    icon.textContent =
+      theme === "dark"
+        ? "☀️"
+        : "🌙";
 
-    const icon =
-        themeToggleBtn.querySelector(
-            "span:first-child"
-        );
+  }
 
+  if (text) {
 
-    const text =
-        themeToggleBtn.querySelector(
-            "span:last-child"
-        );
+    text.textContent =
+      theme === "dark"
+        ? "الوضع النهاري"
+        : "الوضع الليلي";
 
-
-    if (icon) {
-
-        icon.textContent =
-            theme === "dark"
-                ? "☀️"
-                : "🌙";
-
-    }
-
-
-    if (text) {
-
-        text.textContent =
-            theme === "dark"
-                ? "الوضع النهاري"
-                : "الوضع الليلي";
-
-    }
+  }
 
 }
 
 
 /* =========================================================
-   CHAPTER TITLE
+   CHAPTER TITLES
 ========================================================= */
 
-function getChapterTitle(
-    chapter
-) {
+function getChapterTitle(chapter) {
 
-    return "الفصل الأول";
+  const titles = {
+
+    chapter1:
+      "نصوص الفصل الأول",
+
+    chapter2:
+      "نصوص الفصل الثاني",
+
+    chapter3:
+      "نصوص الفصل الثالث"
+
+  };
+
+  return (
+    titles[chapter] ||
+    "نصوص English 4MS"
+  );
 
 }
 
 
 /* =========================================================
-   CHAPTER DESCRIPTION
+   CHAPTER DESCRIPTIONS
 ========================================================= */
 
-function getChapterDescription(
-    chapter
-) {
+function getChapterDescription(chapter) {
 
-    return "نصوص إنجليزية مختارة بعناية للتحضير لشهادة التعليم المتوسط وتطوير مهارات القراءة والفهم والمفردات.";
+  const descriptions = {
+
+    chapter1:
+      "نصوص إنجليزية مختارة بعناية للتحضير لشهادة التعليم المتوسط وتطوير مهارات القراءة والفهم والمفردات.",
+
+    chapter2:
+      "نصوص الفصل الثاني لتطوير مهارات القراءة والفهم والمفردات.",
+
+    chapter3:
+      "نصوص الفصل الثالث لتطوير مهارات القراءة والفهم والمفردات."
+
+  };
+
+  return (
+    descriptions[chapter] ||
+    "نصوص إنجليزية لتلاميذ السنة الرابعة متوسط."
+  );
 
 }
 
@@ -3485,49 +3020,39 @@ function getChapterDescription(
    TOAST
 ========================================================= */
 
-let toastTimer =
-    null;
+let toastTimer = null;
 
+function showToast(message) {
 
-function showToast(
-    message
-) {
+  if (
+    !DOM.toast ||
+    !DOM.toastMessage
+  ) {
+    return;
+  }
 
-    if (
-        !DOM.toast ||
-        !DOM.toastMessage
-    ) {
+  DOM.toastMessage.textContent =
+    message;
 
-        return;
+  DOM.toast.classList.add(
+    "show"
+  );
 
-    }
+  clearTimeout(
+    toastTimer
+  );
 
+  toastTimer =
+    setTimeout(
+      () => {
 
-    DOM.toastMessage.textContent =
-        message;
-
-
-    DOM.toast.classList.add(
-        "show"
-    );
-
-
-    clearTimeout(
-        toastTimer
-    );
-
-
-    toastTimer =
-        setTimeout(
-            () => {
-
-                DOM.toast.classList.remove(
-                    "show"
-                );
-
-            },
-            2500
+        DOM.toast.classList.remove(
+          "show"
         );
+
+      },
+      2500
+    );
 
 }
 
@@ -3538,91 +3063,285 @@ function showToast(
 
 function showDataError() {
 
-    if (
-        !DOM.lessonsList
-    ) {
+  if (!DOM.lessonsList) {
+    return;
+  }
 
-        return;
+  DOM.lessonsList.innerHTML = `
 
-    }
+    <div class="empty-state">
 
+      <div class="empty-icon">
+        ⚠️
+      </div>
 
-    DOM.lessonsList.innerHTML =
+      <h3>
+        تعذر تحميل النصوص
+      </h3>
 
-        `
+      <p>
+        تأكد من وجود ملفات:
+        <strong>
+          chapter1.json
+        </strong>
+        و
+        <strong>
+          chapter2.json
+        </strong>
+        و
+        <strong>
+          chapter3.json
+        </strong>
+        بجانب ملف HTML.
+      </p>
 
-            <div class="empty-state">
+    </div>
 
-                <div class="empty-icon">
-                    ⚠️
-                </div>
-
-
-                <h3>
-                    تعذر تحميل النصوص
-                </h3>
-
-
-                <p>
-                    تأكد من وجود الملف
-                    <strong>
-                        chapter1.json
-                    </strong>
-                    بجانب ملف HTML.
-                </p>
-
-            </div>
-
-        `;
+  `;
 
 }
 
 
 /* =========================================================
-   SECURITY HELPERS
+   SECURITY
 ========================================================= */
 
-function escapeHTML(
-    value
-) {
+function escapeHTML(value) {
 
-    return String(value)
+  return String(value)
 
-        .replace(
-            /&/g,
-            "&amp;"
-        )
+    .replace(
+      /&/g,
+      "&amp;"
+    )
 
-        .replace(
-            /</g,
-            "&lt;"
-        )
+    .replace(
+      /</g,
+      "&lt;"
+    )
 
-        .replace(
-            />/g,
-            "&gt;"
-        )
+    .replace(
+      />/g,
+      "&gt;"
+    )
 
-        .replace(
-            /"/g,
-            "&quot;"
-        )
+    .replace(
+      /"/g,
+      "&quot;"
+    )
 
-        .replace(
-            /'/g,
-            "&#039;"
-        );
+    .replace(
+      /'/g,
+      "&#039;"
+    );
 
 }
 
 
-function escapeAttribute(
-    value
-) {
+function escapeAttribute(value) {
 
-    return escapeHTML(
-        value
+  return escapeHTML(value);
+
+}
+
+
+/* =========================================================
+   OPEN LESSON FROM URL
+========================================================= */
+
+function openLessonFromURL() {
+
+  const params =
+    new URLSearchParams(
+      window.location.search
     );
+
+  const chapter =
+    params.get("chapter") ||
+    "chapter1";
+
+  const lessonId =
+    params.get("lesson");
+
+  if (!lessonId) {
+    return;
+  }
+
+  if (
+    !CONFIG.CHAPTERS.includes(
+      chapter
+    )
+  ) {
+    return;
+  }
+
+  const chapterData =
+    AppState.data[chapter];
+
+  if (!chapterData) {
+
+    console.warn(
+      "Chapter data not loaded:",
+      chapter
+    );
+
+    return;
+
+  }
+
+  const lessons =
+    Array.isArray(
+      chapterData.lessons
+    )
+      ? chapterData.lessons
+      : [];
+
+  /*
+   * البحث أولاً بالـ ID الكامل
+   */
+  let index =
+    lessons.findIndex(
+      (lesson, lessonIndex) => {
+
+        const originalId =
+          lesson?.id ??
+          lessonIndex;
+
+        const fullId =
+          `${chapter}_${originalId}`;
+
+        return (
+          String(fullId) ===
+          String(lessonId)
+        );
+
+      }
+    );
+
+
+  /*
+   * دعم الرابط القديم
+   * chapter1_5
+   */
+  if (
+    index === -1
+  ) {
+
+    index =
+      lessons.findIndex(
+        (lesson, lessonIndex) => {
+
+          const id =
+            lesson?.id ??
+            lessonIndex;
+
+          return (
+            String(id) ===
+            String(lessonId)
+          );
+
+        }
+      );
+
+  }
+
+
+  /*
+   * دعم:
+   * ?chapter=chapter3&lesson=5
+   */
+  if (
+    index === -1 &&
+    /^\d+$/.test(lessonId)
+  ) {
+
+    const number =
+      Number(lessonId);
+
+    if (
+      number >= 1 &&
+      number <= lessons.length
+    ) {
+
+      index =
+        number - 1;
+
+    } else if (
+      number >= 0 &&
+      number < lessons.length
+    ) {
+
+      index =
+        number;
+
+    }
+
+  }
+
+
+  if (
+    index === -1
+  ) {
+
+    console.warn(
+      "Lesson not found:",
+      lessonId
+    );
+
+    return;
+
+  }
+
+
+  AppState.currentChapter =
+    chapter;
+
+  AppState.currentLessonIndex =
+    index;
+
+  AppState.currentLesson =
+    lessons[index];
+
+  AppState.searchQuery =
+    "";
+
+  AppState.showFavoritesOnly =
+    false;
+
+  if (DOM.searchInput) {
+
+    DOM.searchInput.value =
+      "";
+
+  }
+
+  saveStorage();
+
+  saveLastLesson(
+    getLessonId(
+      AppState.currentLesson,
+      index
+    )
+  );
+
+  updateActiveChapter();
+
+  renderLessons();
+
+  renderReader();
+
+  DOM.readerModal?.classList.remove(
+    "hidden"
+  );
+
+  document.body.style.overflow =
+    "hidden";
+
+  window.history.replaceState(
+    {},
+    document.title,
+    window.location.pathname
+  );
 
 }
 
@@ -3632,5 +3351,5 @@ function escapeAttribute(
 ========================================================= */
 
 console.log(
-    "English 4MS — Chapter 1 loaded successfully."
+  "English 4MS — Chapter 1, Chapter 2 & Chapter 3 loaded successfully."
 );
